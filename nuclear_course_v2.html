@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Doomsday Project — Nuclear Risk Course</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Georgia',serif;
+  background:#e8e4de;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:2rem 1rem;
+  color:#1a1a1a;
+}
+
+.pw{
+  width:100%;
+  max-width:900px;
+  background:#f0ede8;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 48px rgba(0,0,0,0.13);
+}
+
+.screen{display:none}
+.screen.active{display:block}
+
+/* ── Top bar ── */
+.topbar{background:#0f1f3d;padding:0 1.75rem;height:54px;display:flex;align-items:center;justify-content:space-between}
+.topbar-logo{color:#e2e8f4;font-size:13px;font-weight:600;letter-spacing:0.03em}
+.topbar-links{display:flex;gap:1.5rem}
+.tl{color:#7a92be;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;transition:color .15s;text-decoration:none}
+.tl:hover,.tl.on{color:#e2e8f4}
+
+/* ── Hero band ── */
+.hero-band{background:#0f1f3d;padding:2.25rem 1.75rem 1.75rem}
+.now-badge{display:inline-flex;align-items:center;gap:6px;background:#1e3561;border:0.5px solid #3a5c96;border-radius:20px;padding:4px 12px;margin-bottom:1rem}
+.now-dot{width:7px;height:7px;border-radius:50%;background:#e07b3a}
+.now-text{font-size:11px;color:#aabfe0;font-family:Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase}
+.hero-h{font-size:24px;font-weight:700;color:#e8eef8;line-height:1.3;margin-bottom:0.5rem}
+.hero-sub{font-size:13px;color:#8faad4;line-height:1.65;max-width:520px;font-family:Arial,sans-serif}
+.hero-meta{display:flex;gap:1rem;margin-top:1.25rem;flex-wrap:wrap}
+.hm-pill{background:#1a2f54;border:0.5px solid #2e4a7a;border-radius:20px;padding:5px 13px;font-size:12px;color:#8faad4;font-family:Arial,sans-serif}
+
+/* ── Content area ── */
+.ca{padding:1.5rem 1.75rem;background:#ffffff}
+.sec-label{font-size:10px;text-transform:uppercase;letter-spacing:0.09em;color:#888;margin-bottom:0.75rem;font-weight:700;font-family:Arial,sans-serif}
+
+/* ── Alert strip ── */
+.alert-strip{background:#fdf6ec;border:0.5px solid #e8c882;border-radius:10px;padding:0.85rem 1.1rem;display:flex;gap:12px;align-items:flex-start;margin-bottom:1.25rem}
+.alert-icon{width:20px;height:20px;border-radius:50%;background:#e8a030;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;color:#fff;font-weight:700;font-family:Arial,sans-serif}
+.alert-text{font-size:12px;color:#7a5010;line-height:1.6;font-family:Arial,sans-serif}
+.alert-text strong{color:#5a3a08;font-weight:700}
+
+/* ── Day row ── */
+.day-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1.5rem}
+.dc{background:#f7f5f2;border:1px solid #e0dbd4;border-radius:10px;padding:0.75rem;cursor:pointer;transition:all .15s}
+.dc:hover{border-color:#3a5c96;background:#eef2fb}
+.dc.feat{border-color:#3a5c96;background:#e8eef8}
+.dc-num{font-size:10px;color:#888;margin-bottom:3px;font-family:Arial,sans-serif}
+.dc-title{font-size:11px;font-weight:700;color:#1a1a1a;line-height:1.4;font-family:Arial,sans-serif}
+.dc.feat .dc-num{color:#2a4e96}
+.dc.feat .dc-title{color:#1a3070}
+.dc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.mode-badge{font-size:9px;padding:2px 6px;border-radius:10px;font-family:Arial,sans-serif;font-weight:700}
+.mb-vis{background:#ede8fb;color:#3c2889}
+.mb-disc{background:#e8f5ee;color:#1a5030}
+.mb-hands{background:#faeeda;color:#6b3d00}
+
+/* ── Schedule ── */
+.sched-wrap{border:1px solid #e0dbd4;border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.sched-row{display:grid;grid-template-columns:90px 1fr auto;border-bottom:1px solid #f0ede8;align-items:center}
+.sched-row:last-child{border-bottom:none}
+.sched-row.sh{background:#f7f5f2}
+.sc{padding:9px 12px;font-size:12px;font-family:Arial,sans-serif}
+.sc.time{color:#888;font-size:11px}
+.sc.act{color:#1a1a1a}
+.sc.head{font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:#888;font-weight:700}
+.stag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-family:Arial,sans-serif;font-weight:700}
+.st-r{background:#e8eef8;color:#1a3670}
+.st-f{background:#f0e8f8;color:#3d1a70}
+.st-d{background:#e8f5ee;color:#1a5033}
+.st-q{background:#faeeda;color:#6b3d00}
+
+/* ── Buttons ── */
+.cta{display:inline-block;background:#0f1f3d;color:#e8eef8;font-size:13px;padding:10px 20px;border-radius:8px;cursor:pointer;border:none;margin-top:1rem;font-family:Arial,sans-serif;font-weight:700;transition:background .15s}
+.cta:hover{background:#1a3060}
+.cta-o{display:inline-block;background:transparent;color:#1a3060;font-size:13px;padding:10px 20px;border-radius:8px;cursor:pointer;border:1px solid #3a5c96;margin-top:1rem;font-family:Arial,sans-serif;font-weight:600;transition:all .15s}
+.cta-o:hover{background:#eef2fb}
+
+/* ── Module header ── */
+.mod-header{background:#edf1fa;border-bottom:1px solid #c4d0ea;padding:1.25rem 1.75rem}
+.breadcrumb{font-size:12px;color:#3a5c96;margin-bottom:0.35rem;cursor:pointer;font-family:Arial,sans-serif}
+.breadcrumb:hover{text-decoration:underline}
+.mod-title{font-size:21px;font-weight:700;color:#1a1a1a;margin-bottom:0.25rem}
+.mod-meta{font-size:12px;color:#666;font-family:Arial,sans-serif;display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.5rem;align-items:center}
+.mm-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px}
+
+/* ── Progress bar ── */
+.prog-wrap{height:5px;background:#e0dbd4;border-radius:3px;margin-bottom:1.5rem}
+.prog-fill{height:5px;background:#3a5c96;border-radius:3px;transition:width .3s}
+
+/* ── Two column ── */
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem}
+
+/* ── Cards ── */
+.card{background:#f7f5f2;border:1px solid #e0dbd4;border-radius:10px;padding:1rem 1.15rem;margin-bottom:0.75rem}
+.card h3{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:0.4rem;font-family:Arial,sans-serif}
+.card p{font-size:12px;color:#555;line-height:1.65;font-family:Arial,sans-serif}
+
+/* ── Facilitator tip ── */
+.fac-tip{background:#f0f9f2;border:1px solid #a8d4b4;border-radius:10px;padding:0.85rem 1.1rem;margin-bottom:1rem;display:flex;gap:10px}
+.fac-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#1a5030;font-family:Arial,sans-serif;margin-bottom:4px}
+.fac-body{font-size:12px;color:#2a4030;line-height:1.55;font-family:Arial,sans-serif}
+.fac-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ── Timeline ── */
+.tl-item{display:flex;gap:10px;margin-bottom:0.7rem;align-items:flex-start}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:#3a5c96;margin-top:4px;flex-shrink:0}
+.tl-text{font-size:12px;color:#333;line-height:1.5;font-family:Arial,sans-serif}
+
+/* ── Mode chips ── */
+.mode-row{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.mode-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-family:Arial,sans-serif;font-weight:700}
+.mc-vis{background:#ede8fb;color:#3c2889}
+.mc-disc{background:#e8f5ee;color:#1a5030}
+.mc-hands{background:#faeeda;color:#6b3d00}
+
+/* ── Excerpt ── */
+.excerpt{border-left:3px solid #3a5c96;padding:0.9rem 1.1rem;background:#f4f7fc;border-radius:0 8px 8px 0;margin-bottom:0.6rem}
+.excerpt p{font-size:14px;color:#1a1a1a;line-height:1.8;font-style:italic}
+.cite{font-size:11px;color:#888;margin-bottom:1.25rem;font-family:Arial,sans-serif}
+
+/* ── Film clip bar ── */
+.clip-bar{display:flex;align-items:center;gap:12px;background:#0f1f3d;border-radius:8px;padding:0.8rem 1rem;margin-bottom:1.25rem}
+.clip-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.clip-tri{width:0;height:0;border-style:solid;border-width:5px 0 5px 9px;border-color:transparent transparent transparent #fff;margin-left:2px}
+.clip-info{font-size:12px;color:#8faad4;font-family:Arial,sans-serif}
+.clip-info strong{display:block;font-size:13px;color:#e2e8f4;font-weight:700;margin-bottom:2px}
+
+/* ── Discussion box ── */
+.discuss-box{background:#f4f7fc;border:1px solid #c4d0ea;border-radius:10px;padding:1rem 1.15rem;margin-bottom:1.25rem}
+.disc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#3a5c96;margin-bottom:0.35rem;font-family:Arial,sans-serif}
+.discuss-box p{font-size:13px;color:#1a1a1a;line-height:1.7;font-family:Arial,sans-serif}
+
+/* ── Poll ── */
+.poll-wrap{margin-bottom:1.5rem}
+.poll-q{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:0.75rem;line-height:1.5;font-family:Arial,sans-serif}
+.poll-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid #e0dbd4;border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:12px;color:#1a1a1a;font-family:Arial,sans-serif;transition:all .12s}
+.poll-opt:hover{border-color:#3a5c96;background:#eef2fb}
+.poll-opt.sel{border-color:#3a5c96;background:#e8eef8;color:#1a3070}
+.poll-bar-wrap{flex:1;height:6px;background:#e0dbd4;border-radius:3px;overflow:hidden;display:none}
+.poll-bar{height:6px;background:#3a5c96;border-radius:3px;width:0;transition:width .5s}
+.poll-pct{font-size:11px;color:#888;min-width:28px;text-align:right;display:none;font-family:Arial,sans-serif}
+
+/* ── Quiz ── */
+.q-block{margin-bottom:1.5rem}
+.q-num{font-size:10px;color:#888;margin-bottom:0.2rem;text-transform:uppercase;letter-spacing:0.06em;font-family:Arial,sans-serif}
+.q-text{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:0.65rem;line-height:1.5}
+.choice{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid #e0dbd4;border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:12px;color:#1a1a1a;font-family:Arial,sans-serif;transition:all .12s}
+.choice:hover{border-color:#3a5c96;background:#eef2fb}
+.choice.sel{border-color:#3a5c96;background:#e8eef8;color:#1a3070}
+.choice input[type="radio"]{accent-color:#3a5c96}
+.reflect-area{width:100%;border:1px solid #e0dbd4;border-radius:8px;padding:0.8rem 1rem;font-size:12px;font-family:Arial,sans-serif;color:#1a1a1a;background:#f7f5f2;resize:vertical;min-height:100px}
+.reflect-area:focus{outline:none;border-color:#3a5c96}
+
+/* ── Action grid ── */
+.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.ac-card{background:#f7f5f2;border:1px solid #e0dbd4;border-radius:10px;padding:1rem;transition:all .15s}
+.ac-card:hover{border-color:#3a5c96;background:#eef2fb}
+.ac-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:0.6rem;font-size:16px}
+.ac-title{font-size:12px;font-weight:700;color:#1a1a1a;margin-bottom:4px;font-family:Arial,sans-serif}
+.ac-desc{font-size:11px;color:#666;line-height:1.5;font-family:Arial,sans-serif}
+
+/* ── Resources ── */
+.res-list{list-style:none}
+.res-li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0ede8;font-size:12px;font-family:Arial,sans-serif}
+.res-li:last-child{border-bottom:none}
+.ri-icon{font-size:15px;min-width:20px;margin-top:1px}
+.ri-body{line-height:1.5;color:#1a1a1a}
+.ri-body strong{font-weight:700}
+.ri-body span{display:block;font-size:11px;color:#888}
+
+/* ── Bottom nav ── */
+.bot-nav{display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.75rem;border-top:1px solid #e0dbd4;background:#ffffff}
+.btn-s{font-size:12px;padding:7px 15px;border-radius:8px;cursor:pointer;border:1px solid #c8c3bc;background:transparent;color:#1a1a1a;font-family:Arial,sans-serif;font-weight:700;transition:all .12s}
+.btn-s:hover{background:#f0ede8}
+.btn-s.pr{background:#0f1f3d;color:#e8eef8;border-color:#0f1f3d}
+.btn-s.pr:hover{background:#1a3060}
+.dots{display:flex;gap:5px;align-items:center}
+.d{width:7px;height:7px;border-radius:50%;background:#c8c3bc;transition:background .15s}
+.d.on{background:#3a5c96}
+
+/* ── Responsive ── */
+@media(max-width:620px){
+  .day-row{grid-template-columns:repeat(3,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .action-grid{grid-template-columns:1fr}
+  .topbar-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="pw">
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1 — HOME / LANDING
+════════════════════════════════════════ -->
+<div class="screen active" id="s1">
+  <div class="topbar">
+    <span class="topbar-logo">Doomsday Project — Nuclear Risk Course</span>
+    <div class="topbar-links">
+      <span class="tl on" onclick="go(1)">Home</span>
+      <span class="tl" onclick="go(2)">Day 1</span>
+      <span class="tl" onclick="go(5)">Resources</span>
+    </div>
+  </div>
+
+  <div class="hero-band">
+    <div class="now-badge"><div class="now-dot"></div><span class="now-text">This is a live issue — not Cold War history</span></div>
+    <div class="hero-h">Understanding nuclear risk &amp; your power to act</div>
+    <div class="hero-sub">A one-week course built around <em>How to Stop a Nuclear War</em>. No prior knowledge needed — just curiosity and a willingness to engage.</div>
+    <div class="hero-meta">
+      <div class="hm-pill">5 days · college level</div>
+      <div class="hm-pill">Visual · discussion · hands-on</div>
+      <div class="hm-pill">Emotional check-ins included</div>
+    </div>
+  </div>
+
+  <div class="ca">
+    <div class="alert-strip">
+      <div class="alert-icon">!</div>
+      <div class="alert-text"><strong>Why now?</strong> In 2025, India-Pakistan tensions reached their highest point in decades. Nine countries still hold ~12,500 nuclear warheads. This week connects those facts to what you can actually do.</div>
+    </div>
+
+    <div class="sec-label">Week at a glance — click a day</div>
+    <div class="day-row">
+      <div class="dc feat" onclick="go(2)">
+        <div class="dc-num">Day 1</div>
+        <div class="dc-title">Intro &amp; film screening</div>
+        <div class="dc-tags"><span class="mode-badge mb-vis">Visual</span><span class="mode-badge mb-disc">Discussion</span></div>
+      </div>
+      <div class="dc">
+        <div class="dc-num">Day 2</div>
+        <div class="dc-title">Cold War history &amp; today</div>
+        <div class="dc-tags"><span class="mode-badge mb-vis">Visual</span><span class="mode-badge mb-hands">Hands-on</span></div>
+      </div>
+      <div class="dc">
+        <div class="dc-num">Day 3</div>
+        <div class="dc-title">Deterrence &amp; ethics</div>
+        <div class="dc-tags"><span class="mode-badge mb-disc">Discussion</span><span class="mode-badge mb-hands">Hands-on</span></div>
+      </div>
+      <div class="dc">
+        <div class="dc-num">Day 4</div>
+        <div class="dc-title">Activism &amp; treaties</div>
+        <div class="dc-tags"><span class="mode-badge mb-vis">Visual</span><span class="mode-badge mb-disc">Discussion</span></div>
+      </div>
+      <div class="dc">
+        <div class="dc-num">Day 5</div>
+        <div class="dc-title">Your action plan</div>
+        <div class="dc-tags"><span class="mode-badge mb-hands">Hands-on</span></div>
+      </div>
+    </div>
+
+    <div class="sec-label">Day 1 schedule</div>
+    <div class="sched-wrap">
+      <div class="sched-row sh">
+        <div class="sc head">Time</div>
+        <div class="sc head">Activity</div>
+        <div class="sc head">Format</div>
+      </div>
+      <div class="sched-row">
+        <div class="sc time">9:00 am</div>
+        <div class="sc act">Welcome, grounding exercise &amp; course overview</div>
+        <div class="sc"><span class="stag st-d">Discussion</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sc time">10:00 am</div>
+        <div class="sc act">Pre-screening reading: <em>The Button</em> — Ch. 1</div>
+        <div class="sc"><span class="stag st-r">Reading</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sc time">11:30 am</div>
+        <div class="sc act">Film screening — <em>How to Stop a Nuclear War</em></div>
+        <div class="sc"><span class="stag st-f">Film</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sc time">2:00 pm</div>
+        <div class="sc act">Post-screening reflection &amp; check-in poll</div>
+        <div class="sc"><span class="stag st-q">Quiz</span></div>
+      </div>
+    </div>
+
+    <button class="cta" onclick="go(2)">Start Day 1 →</button>
+  </div>
+
+  <div class="bot-nav">
+    <span style="font-size:11px;color:#888;font-family:Arial,sans-serif">Screen 1 of 5</span>
+    <div class="dots"><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+    <button class="btn-s pr" onclick="go(2)">Day 1 →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2 — DAY 1 MODULE
+════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="topbar">
+    <span class="topbar-logo">Doomsday Project — Nuclear Risk Course</span>
+    <div class="topbar-links">
+      <span class="tl" onclick="go(1)">Home</span>
+      <span class="tl on" onclick="go(2)">Day 1</span>
+      <span class="tl" onclick="go(5)">Resources</span>
+    </div>
+  </div>
+
+  <div class="mod-header">
+    <div class="breadcrumb" onclick="go(1)">← Course home</div>
+    <div class="mod-title">Day 1 — Introduction &amp; film connection</div>
+    <div class="mod-meta">
+      <span><span class="mm-dot" style="background:#3a5c96"></span>4 activities</span>
+      <span><span class="mm-dot" style="background:#7a92be"></span>Est. 5 hrs</span>
+      <span><span class="mm-dot" style="background:#a8c0e0"></span>No prior knowledge needed</span>
+    </div>
+  </div>
+
+  <div class="ca">
+    <div class="prog-wrap"><div class="prog-fill" style="width:0%"></div></div>
+
+    <div class="fac-tip">
+      <div class="fac-icon">&#128100;</div>
+      <div>
+        <div class="fac-label">Facilitator note — Marcus &amp; Dr. Rodriguez</div>
+        <div class="fac-body">Open with the grounding exercise (3 min). Remind students that opt-out is always available. If the room feels tense after the film, use the de-escalation script in your facilitator guide before moving to discussion.</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="sec-label">Why this module</div>
+        <div class="card">
+          <h3>The issue isn't history — it's now</h3>
+          <p>Students often enter thinking nuclear war is a Cold War relic. This module uses the film alongside present-day examples to challenge that. By the end of Day 1, you'll understand how risk actually accumulates — and why individual action matters.</p>
+        </div>
+
+        <div class="sec-label" style="margin-top:0.85rem">Today's sequence</div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Grounding exercise</strong> — 3 min breathing + opt-out reminder</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Pre-reading</strong> — Ch. 1 of <em>The Button</em> by Perry &amp; Collina</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Film screening</strong> — <em>How to Stop a Nuclear War</em> (~90 min)</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Lesson + reflection</strong> — Key concepts, film analysis, check-in poll</div></div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" onclick="go(3)">Go to lesson →</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-label">Key concepts</div>
+        <div class="card">
+          <h3>Nuclear deterrence</h3>
+          <p>The logic that possessing nukes prevents their use — and the systems failures that challenge it.</p>
+        </div>
+        <div class="card">
+          <h3>Risk by accident</h3>
+          <p>Most close calls weren't from aggression — they were errors, miscommunication, and system failures under pressure.</p>
+        </div>
+        <div class="card">
+          <h3>Student agency</h3>
+          <p>The 1980s freeze movement shows students have moved nuclear policy before. You can too.</p>
+        </div>
+
+        <div class="sec-label" style="margin-top:0.85rem">Learning modes today</div>
+        <div class="mode-row">
+          <span class="mode-chip mc-vis">Visual</span>
+          <span class="mode-chip mc-disc">Discussion</span>
+          <span class="mode-chip mc-hands">Hands-on</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot-nav">
+    <button class="btn-s" onclick="go(1)">← Home</button>
+    <div class="dots"><div class="d"></div><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+    <button class="btn-s pr" onclick="go(3)">Lesson →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3 — LESSON / CONTENT
+════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="topbar">
+    <span class="topbar-logo">Doomsday Project — Nuclear Risk Course</span>
+    <div class="topbar-links">
+      <span class="tl" onclick="go(1)">Home</span>
+      <span class="tl on" onclick="go(2)">Day 1</span>
+      <span class="tl" onclick="go(5)">Resources</span>
+    </div>
+  </div>
+
+  <div class="mod-header">
+    <div class="breadcrumb" onclick="go(2)">← Day 1 module</div>
+    <div class="mod-title">Lesson — The logic (and limits) of deterrence</div>
+    <div class="mod-meta">
+      <span class="mode-chip mc-vis" style="font-size:11px;padding:3px 10px">Visual</span>
+      <span class="mode-chip mc-disc" style="font-size:11px;padding:3px 10px">Discussion</span>
+    </div>
+  </div>
+
+  <div class="ca">
+    <div class="prog-wrap"><div class="prog-fill" style="width:50%"></div></div>
+
+    <div style="max-width:660px">
+      <div class="sec-label">Reading excerpt</div>
+      <div class="excerpt">
+        <p>"The danger is not that our leaders are evil. The danger is that the system we have built gives very little room for error — and in a crisis, error is almost guaranteed."</p>
+      </div>
+      <p class="cite">— William Perry &amp; Tom Collina, <em>The Button</em> (2020), Ch. 1 (paraphrased for discussion)</p>
+
+      <div class="sec-label">Film reference</div>
+      <div class="clip-bar">
+        <div class="clip-btn"><div class="clip-tri"></div></div>
+        <div class="clip-info">
+          <strong>How to Stop a Nuclear War — 00:18:40</strong>
+          Able Archer 1983: how a NATO war exercise nearly triggered a Soviet nuclear response.
+        </div>
+      </div>
+
+      <div class="fac-tip" style="margin-bottom:1.25rem">
+        <div class="fac-icon">&#128100;</div>
+        <div>
+          <div class="fac-label">Facilitator note</div>
+          <div class="fac-body">Pause the film here and ask: "What surprised you?" — a low-stakes, open-ended entry point. Quieter students can write first before sharing. No debate required at this stage.</div>
+        </div>
+      </div>
+
+      <div class="sec-label">Framing — as you watched</div>
+      <p style="font-size:13px;color:#555;line-height:1.7;margin-bottom:1.25rem;font-family:Arial,sans-serif">The film argues that nuclear risk is not primarily about intent — it is about structure, miscommunication, and time pressure under stress. The Able Archer segment shows how a routine exercise was nearly catastrophic. This is a <em>systems</em> problem, not just a political one.</p>
+
+      <div class="sec-label">Discussion question</div>
+      <div class="discuss-box">
+        <div class="disc-label">For small groups or written response</div>
+        <p>The film suggests the greatest danger isn't aggression — it's <em>accident</em>. Do you agree? What systemic change — policy, technology, or diplomacy — would address the specific risks it describes? Use at least one example from the documentary.</p>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="cta" onclick="go(4)">Continue to reflection →</button>
+        <button class="cta-o" onclick="go(2)">← Module</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot-nav">
+    <button class="btn-s" onclick="go(2)">← Module</button>
+    <div class="dots"><div class="d"></div><div class="d"></div><div class="d on"></div><div class="d"></div><div class="d"></div></div>
+    <button class="btn-s pr" onclick="go(4)">Reflection →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN 4 — REFLECTION & QUIZ
+════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="topbar">
+    <span class="topbar-logo">Doomsday Project — Nuclear Risk Course</span>
+    <div class="topbar-links">
+      <span class="tl" onclick="go(1)">Home</span>
+      <span class="tl on" onclick="go(2)">Day 1</span>
+      <span class="tl" onclick="go(5)">Resources</span>
+    </div>
+  </div>
+
+  <div class="mod-header">
+    <div class="breadcrumb" onclick="go(3)">← Lesson</div>
+    <div class="mod-title">Day 1 reflection &amp; check-in</div>
+    <div class="mod-meta"><span>Ungraded · ~8 min · anonymous option available</span></div>
+  </div>
+
+  <div class="ca">
+    <div class="prog-wrap"><div class="prog-fill" style="width:75%"></div></div>
+
+    <div class="alert-strip" style="margin-bottom:1.25rem;background:#f0f7ff;border-color:#a8c8ec">
+      <div class="alert-icon" style="background:#4a7ec8">&#9825;</div>
+      <div class="alert-text" style="color:#1a3a6a"><strong style="color:#0f2550">Emotional check-in:</strong> Before you start — how are you feeling after the film? It's okay if this content brought up strong reactions. Take a breath. You can skip any question and return to it later.</div>
+    </div>
+
+    <div style="max-width:640px">
+      <div class="sec-label">Quick poll — share your reaction (anonymous)</div>
+      <div class="poll-wrap" id="poll1">
+        <div class="poll-q">After watching the film, which of these best describes how you feel?</div>
+        <div class="poll-opt" onclick="vote(this,'poll1',38)">
+          Motivated to learn more and take action
+          <div class="poll-bar-wrap"><div class="poll-bar"></div></div>
+          <div class="poll-pct"></div>
+        </div>
+        <div class="poll-opt" onclick="vote(this,'poll1',27)">
+          Surprised — I didn't know the risk was this current
+          <div class="poll-bar-wrap"><div class="poll-bar"></div></div>
+          <div class="poll-pct"></div>
+        </div>
+        <div class="poll-opt" onclick="vote(this,'poll1',22)">
+          Overwhelmed — this is a lot to take in
+          <div class="poll-bar-wrap"><div class="poll-bar"></div></div>
+          <div class="poll-pct"></div>
+        </div>
+        <div class="poll-opt" onclick="vote(this,'poll1',13)">
+          Skeptical — I want to see more evidence
+          <div class="poll-bar-wrap"><div class="poll-bar"></div></div>
+          <div class="poll-pct"></div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-num">Question 1 — comprehension</div>
+        <div class="q-text">According to the film, what is the primary source of nuclear risk today?</div>
+        <div class="choice" onclick="pick(this,'q1')"><input type="radio" name="q1"> Deliberate first strikes by hostile states</div>
+        <div class="choice" onclick="pick(this,'q1')"><input type="radio" name="q1"> Accidental launches or miscommunication under pressure</div>
+        <div class="choice" onclick="pick(this,'q1')"><input type="radio" name="q1"> Terrorist acquisition of warheads</div>
+        <div class="choice" onclick="pick(this,'q1')"><input type="radio" name="q1"> Failure of international inspections</div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-num">Question 2 — reflection</div>
+        <div class="q-text">In 2–3 sentences: what's one thing from the film that surprised you — and why does it matter to you personally?</div>
+        <textarea class="reflect-area" placeholder="Write your reflection here. There are no wrong answers."></textarea>
+      </div>
+
+      <button class="cta" onclick="go(5)">Submit &amp; see action pathways →</button>
+    </div>
+  </div>
+
+  <div class="bot-nav">
+    <button class="btn-s" onclick="go(3)">← Lesson</button>
+    <div class="dots"><div class="d"></div><div class="d"></div><div class="d"></div><div class="d on"></div><div class="d"></div></div>
+    <button class="btn-s pr" onclick="go(5)">Resources →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN 5 — RESOURCES & ACTION
+════════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="topbar">
+    <span class="topbar-logo">Doomsday Project — Nuclear Risk Course</span>
+    <div class="topbar-links">
+      <span class="tl" onclick="go(1)">Home</span>
+      <span class="tl" onclick="go(2)">Day 1</span>
+      <span class="tl on" onclick="go(5)">Resources</span>
+    </div>
+  </div>
+
+  <div class="hero-band" style="padding:1.5rem 1.75rem">
+    <div class="now-badge"><div class="now-dot" style="background:#4caf80"></div><span class="now-text">Now — what you can actually do</span></div>
+    <div class="hero-h" style="font-size:20px">Readings, organizations &amp; civic action pathways</div>
+    <div class="hero-sub">Awareness is step one. Here's what comes next.</div>
+  </div>
+
+  <div class="ca">
+    <div class="prog-wrap"><div class="prog-fill" style="width:100%"></div></div>
+
+    <div class="sec-label">Civic action pathways — pick what fits you</div>
+    <div class="action-grid">
+      <div class="ac-card">
+        <div class="ac-icon" style="background:#e8eef8">&#128221;</div>
+        <div class="ac-title">Write to your rep</div>
+        <div class="ac-desc">Contact your congressional representative about the No First Use Act. ICAN has a ready-made template.</div>
+      </div>
+      <div class="ac-card">
+        <div class="ac-icon" style="background:#e8f5ee">&#128101;</div>
+        <div class="ac-title">Join a campus group</div>
+        <div class="ac-desc">Back from the Brink has chapters at 200+ universities. Host a screening of the film at your school.</div>
+      </div>
+      <div class="ac-card">
+        <div class="ac-icon" style="background:#faeeda">&#128240;</div>
+        <div class="ac-title">Write an op-ed</div>
+        <div class="ac-desc">Your campus paper reaches decision-makers. Ploughshares Fund offers a free student writing guide.</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="sec-label">Course readings</div>
+        <ul class="res-list">
+          <li class="res-li"><span class="ri-icon">&#128218;</span><div class="ri-body"><strong>The Button</strong> — Perry &amp; Collina<span>Required · Days 1–2 · Chapters 1–4</span></div></li>
+          <li class="res-li"><span class="ri-icon">&#128218;</span><div class="ri-body"><strong>Command and Control</strong> — Eric Schlosser<span>Supplemental · Days 2–3 · systems &amp; accidents</span></div></li>
+          <li class="res-li"><span class="ri-icon">&#128218;</span><div class="ri-body"><strong>Nuclear Folly</strong> — Serhii Plokhy<span>Supplemental · Day 2 · Cold War &amp; today</span></div></li>
+          <li class="res-li"><span class="ri-icon">&#128196;</span><div class="ri-body"><strong>Treaty on the Prohibition of Nuclear Weapons</strong><span>Primary source · Day 4 · TPNW full text</span></div></li>
+        </ul>
+
+        <div class="sec-label" style="margin-top:1.1rem">Organizations to follow</div>
+        <ul class="res-list">
+          <li class="res-li"><span class="ri-icon">&#127760;</span><div class="ri-body"><strong>ICAN</strong> — International Campaign to Abolish Nuclear Weapons<span>Nobel Prize–winning · ican.org</span></div></li>
+          <li class="res-li"><span class="ri-icon">&#127760;</span><div class="ri-body"><strong>Ploughshares Fund</strong><span>Policy advocacy &amp; student resources · ploughshares.org</span></div></li>
+          <li class="res-li"><span class="ri-icon">&#127760;</span><div class="ri-body"><strong>Back from the Brink</strong><span>U.S. grassroots campaign · campus chapters available</span></div></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sec-label">Syllabus summary</div>
+        <div class="card">
+          <h3>Graded work</h3>
+          <p>Daily reflections (ungraded), one short essay (Day 3), and a final action brief presented on Day 5.</p>
+        </div>
+        <div class="card">
+          <h3>Final project</h3>
+          <p>A 2-page civic action brief: one concrete step you, your campus, or your community could take — backed by evidence from the course.</p>
+        </div>
+        <div class="card">
+          <h3>Remote learners</h3>
+          <p>All activities have async alternatives. Polls, discussion boards, and collaborative docs are available for every session.</p>
+        </div>
+        <button class="cta" onclick="go(1)" style="margin-top:0.5rem">← Back to home</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot-nav">
+    <button class="btn-s" onclick="go(4)">← Reflection</button>
+    <div class="dots"><div class="d"></div><div class="d"></div><div class="d"></div><div class="d"></div><div class="d on"></div></div>
+    <button class="btn-s pr" onclick="go(1)">Start over →</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function go(n) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('s' + n).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function pick(el, name) {
+  document.querySelectorAll('[onclick*="\'' + name + '\'"]').forEach(function(c){ c.classList.remove('sel'); });
+  el.classList.add('sel');
+  el.querySelector('input').checked = true;
+}
+
+function vote(el, pollId, pct) {
+  var poll = document.getElementById(pollId);
+  if (poll.dataset.voted) return;
+  poll.dataset.voted = '1';
+  var labels = [38, 27, 22, 13];
+  var opts = poll.querySelectorAll('.poll-opt');
+  opts.forEach(function(o, i) {
+    o.style.cursor = 'default';
+    var bar = o.querySelector('.poll-bar-wrap');
+    var fill = o.querySelector('.poll-bar');
+    var p = o.querySelector('.poll-pct');
+    bar.style.display = 'block';
+    p.style.display = 'block';
+    p.textContent = labels[i] + '%';
+    setTimeout(function(){ fill.style.width = labels[i] + '%'; }, 50);
+  });
+  el.classList.add('sel');
+}
+</script>
+
+</body>
+</html>
