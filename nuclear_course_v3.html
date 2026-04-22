@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How to Stop a Nuclear War — Course</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f1f3d;
+  --navy2:#1a2f54;
+  --blue:#3a5c96;
+  --blue-light:#e8eef8;
+  --green-dark:#0d2010;
+  --green:#1a5030;
+  --green-light:#e8f5ee;
+  --amber-light:#faeeda;
+  --amber-dark:#6b3d00;
+  --vis:#ede8fb;
+  --vis-t:#3c2889;
+  --sand:#f5f2ed;
+  --border:#e0dbd4;
+  --text:#1a1a1a;
+  --muted:#666;
+  --white:#fff;
+}
+body{font-family:'DM Sans',sans-serif;background:#e8e4de;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem;color:var(--text)}
+h1,h2,h3,.serif{font-family:'DM Serif Display',serif}
+
+.shell{width:100%;max-width:920px;background:var(--white);border-radius:16px;box-shadow:0 8px 48px rgba(0,0,0,0.14);overflow:hidden}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--navy);padding:0 1.75rem;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{color:#e2e8f4;font-size:13px;font-family:'DM Serif Display',serif;letter-spacing:0.02em}
+.nav-links{display:flex;gap:0}
+.ntl{color:#7a92be;font-size:12px;cursor:pointer;padding:0 13px;height:56px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.ntl:hover{color:#e2e8f4}
+.ntl.on{color:#e2e8f4;border-bottom-color:#5a8de0}
+.ntl.fac{color:#6aaf80;margin-left:10px;border-left:0.5px solid #2a3a5a;padding-left:14px}
+.ntl.fac.on{color:#a8e0b8;border-bottom-color:#4caf80}
+
+/* ── VIEWS ── */
+.view{display:none}.view.active{display:block}
+
+/* ── DAY NAV ── */
+.day-nav{background:#f9f7f4;border-bottom:1px solid var(--border);padding:0 1.75rem;display:flex;gap:0;overflow-x:auto}
+.dnl{padding:12px 16px;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);white-space:nowrap;transition:all .15s;font-family:'DM Sans',sans-serif}
+.dnl:hover{color:var(--text)}
+.dnl.on{color:var(--navy);border-bottom-color:var(--blue);font-weight:500}
+
+/* ── SCREENS ── */
+.screen{display:none}.screen.active{display:block}
+
+/* ── HERO ── */
+.hero{background:var(--navy);padding:2.5rem 1.75rem 2rem}
+.now-badge{display:inline-flex;align-items:center;gap:6px;background:#1e3561;border:0.5px solid #3a5c96;border-radius:20px;padding:4px 12px;margin-bottom:1rem}
+.now-dot{width:7px;height:7px;border-radius:50%;background:#e07b3a}
+.now-text{font-size:11px;color:#aabfe0;letter-spacing:0.06em;text-transform:uppercase}
+.hero h1{font-size:26px;color:#e8eef8;line-height:1.25;margin-bottom:0.5rem}
+.hero p{font-size:13px;color:#8faad4;line-height:1.65;max-width:520px}
+.hero-pills{display:flex;gap:8px;margin-top:1.25rem;flex-wrap:wrap}
+.pill{background:#1a2f54;border:0.5px solid #2e4a7a;border-radius:20px;padding:5px 13px;font-size:11px;color:#8faad4}
+
+/* ── VIDEO EMBED ── */
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;margin-bottom:1.5rem;background:#000}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:10px}
+
+/* ── CONTENT ── */
+.ca{padding:1.5rem 1.75rem}
+.sec-label{font-size:10px;text-transform:uppercase;letter-spacing:0.09em;color:var(--muted);margin-bottom:0.75rem;font-weight:500}
+
+.alert{background:#fdf6ec;border:0.5px solid #e8c882;border-radius:10px;padding:0.85rem 1.1rem;display:flex;gap:12px;align-items:flex-start;margin-bottom:1.25rem}
+.alert-icon{width:20px;height:20px;min-width:20px;border-radius:50%;background:#e8a030;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:500;margin-top:1px}
+.alert-text{font-size:12px;color:#7a5010;line-height:1.6}
+.alert-text strong{color:#5a3a08}
+.alert.blue{background:#f0f7ff;border-color:#a8c8ec}
+.alert.blue .alert-icon{background:#4a7ec8}
+.alert.blue .alert-text{color:#1a3a6a}
+.alert.blue .alert-text strong{color:#0f2550}
+
+/* ── DAY CARDS ── */
+.day-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:1.5rem}
+.dc{background:var(--sand);border:1px solid var(--border);border-radius:10px;padding:0.75rem;cursor:pointer;transition:all .15s}
+.dc:hover{border-color:var(--blue);background:var(--blue-light)}
+.dc.on{border-color:var(--blue);background:var(--blue-light)}
+.dc-num{font-size:10px;color:var(--muted);margin-bottom:3px}
+.dc-title{font-size:11px;font-weight:500;color:var(--text);line-height:1.4}
+.dc.on .dc-num{color:#2a4e96}.dc.on .dc-title{color:#1a3070}
+.dc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.mb{font-size:9px;padding:2px 6px;border-radius:10px}
+.mb-v{background:var(--vis);color:var(--vis-t)}
+.mb-d{background:var(--green-light);color:var(--green)}
+.mb-h{background:var(--amber-light);color:var(--amber-dark)}
+
+/* ── SCHEDULE TABLE ── */
+.sched{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
+.sched-row{display:grid;grid-template-columns:90px 1fr auto;border-bottom:1px solid var(--border);align-items:center}
+.sched-row:last-child{border-bottom:none}
+.sched-row.hd{background:var(--sand)}
+.sc{padding:9px 12px;font-size:12px}
+.sc.time{color:var(--muted);font-size:11px}
+.sc.hd{font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);font-weight:500}
+.stag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px}
+.st-r{background:var(--blue-light);color:#1a3670}
+.st-f{background:#f0e8f8;color:#3d1a70}
+.st-d{background:var(--green-light);color:var(--green)}
+.st-q{background:var(--amber-light);color:var(--amber-dark)}
+.st-a{background:var(--vis);color:var(--vis-t)}
+
+/* ── MOD HEADER ── */
+.mod-hd{background:#edf1fa;border-bottom:1px solid #c4d0ea;padding:1.25rem 1.75rem}
+.breadcrumb{font-size:12px;color:var(--blue);margin-bottom:0.35rem;cursor:pointer}
+.breadcrumb:hover{text-decoration:underline}
+.mod-hd h2{font-size:20px;color:var(--text);margin-bottom:0.25rem}
+.mod-meta{font-size:12px;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.5rem;align-items:center}
+
+/* ── PROGRESS ── */
+.prog{height:4px;background:var(--border);border-radius:2px;margin-bottom:1.5rem}
+.prog-fill{height:4px;background:var(--blue);border-radius:2px}
+
+/* ── TWO COL ── */
+.two-col{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:1.25rem}
+
+/* ── CARD ── */
+.card{background:var(--sand);border:1px solid var(--border);border-radius:10px;padding:1rem 1.15rem;margin-bottom:0.75rem}
+.card h3{font-size:13px;font-weight:500;color:var(--text);margin-bottom:0.4rem}
+.card p{font-size:12px;color:var(--muted);line-height:1.65}
+
+/* ── TIMELINE ── */
+.tl-item{display:flex;gap:10px;margin-bottom:0.7rem;align-items:flex-start}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);margin-top:5px;flex-shrink:0}
+.tl-text{font-size:12px;color:var(--text);line-height:1.5}
+
+/* ── EXCERPT ── */
+.excerpt{border-left:3px solid var(--blue);padding:0.9rem 1.1rem;background:#f4f7fc;border-radius:0 8px 8px 0;margin-bottom:0.6rem}
+.excerpt p{font-size:13px;color:var(--text);line-height:1.8;font-style:italic;font-family:'DM Serif Display',serif}
+.cite{font-size:11px;color:var(--muted);margin-bottom:1.25rem}
+
+/* ── CLIP BAR ── */
+.clip-bar{display:flex;align-items:center;gap:12px;background:var(--navy);border-radius:8px;padding:0.8rem 1rem;margin-bottom:1.25rem}
+.clip-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.clip-tri{width:0;height:0;border-style:solid;border-width:5px 0 5px 9px;border-color:transparent transparent transparent #fff;margin-left:2px}
+.clip-info{font-size:12px;color:#8faad4}
+.clip-info strong{display:block;font-size:13px;color:#e2e8f4;margin-bottom:2px}
+
+/* ── DISCUSS BOX ── */
+.disc-box{background:#f4f7fc;border:1px solid #c4d0ea;border-radius:10px;padding:1rem 1.15rem;margin-bottom:1.25rem}
+.disc-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--blue);margin-bottom:0.35rem}
+.disc-box p{font-size:13px;color:var(--text);line-height:1.7}
+
+/* ── DISCUSSION MCQ ── */
+.mcq-wrap{background:var(--sand);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem}
+.mcq-q{padding:1rem 1.15rem;border-bottom:1px solid var(--border)}
+.mcq-q p{font-size:14px;color:var(--text);line-height:1.5;font-family:'DM Serif Display',serif}
+.mcq-q .q-label{font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.4rem}
+.mcq-opts{padding:0.75rem 1.15rem;border-bottom:1px solid var(--border)}
+.mcq-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:12px;color:var(--text);transition:all .12s;background:var(--white)}
+.mcq-opt:hover{border-color:var(--blue);background:var(--blue-light)}
+.mcq-opt.sel{border-color:var(--blue);background:var(--blue-light);color:#1a3070}
+.mcq-opt.revealed{cursor:default}
+.opt-radio{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.mcq-opt.sel .opt-radio{border-color:var(--blue);background:var(--blue)}
+.opt-bar-wrap{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;display:none}
+.opt-bar{height:5px;background:var(--blue);border-radius:3px;width:0;transition:width .6s ease}
+.opt-pct{font-size:11px;color:var(--muted);min-width:32px;text-align:right;display:none}
+.mcq-reveal-btn{margin:0 1.15rem 0.75rem;padding:8px 16px;background:var(--navy);color:#e8eef8;border:none;border-radius:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.mcq-discuss{padding:1rem 1.15rem;background:var(--green-light);border-top:1px solid var(--border);display:none}
+.mcq-discuss .d-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--green);margin-bottom:0.5rem}
+.mcq-discuss p{font-size:12px;color:#1a4025;line-height:1.65}
+.mcq-discuss ul{font-size:12px;color:#1a4025;line-height:1.8;padding-left:1rem;margin-top:0.4rem}
+
+/* ── ART CARD ── */
+.art-card{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
+.art-img-wrap{background:#1a1a1a;display:flex;align-items:center;justify-content:center;min-height:180px;padding:1.5rem}
+.art-img-placeholder{text-align:center;color:#888;font-size:12px}
+.art-img-placeholder .art-title-placeholder{font-size:15px;color:#ccc;font-family:'DM Serif Display',serif;margin-bottom:6px}
+.art-body{padding:1rem 1.15rem}
+.art-caption{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:0.75rem}
+.art-reaction-prompt{background:var(--sand);border-radius:8px;padding:0.75rem 1rem;margin-bottom:0.75rem;font-size:12px;color:var(--muted)}
+.art-reveal-btn{padding:7px 14px;background:transparent;border:1px solid var(--blue);color:var(--blue);border-radius:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.art-reveal-btn:hover{background:var(--blue-light)}
+.art-context{display:none;margin-top:0.75rem;border-top:1px solid var(--border);padding-top:0.75rem}
+.art-context p{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:0.5rem}
+.art-context ul{font-size:12px;color:var(--muted);line-height:1.7;padding-left:1rem}
+.art-context .interp-label{font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--blue);margin-bottom:0.35rem;font-weight:500}
+
+/* ── FREEWRITE ── */
+.freewrite-wrap{background:var(--sand);border:1px solid var(--border);border-radius:10px;padding:1rem 1.15rem;margin-bottom:1.25rem}
+.freewrite-wrap .fw-label{font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:0.5rem;font-weight:500}
+.freewrite-wrap p{font-size:12px;color:var(--muted);margin-bottom:0.75rem;line-height:1.6}
+textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);resize:vertical;min-height:90px}
+textarea:focus{outline:none;border-color:var(--blue)}
+
+/* ── RESOURCES ── */
+.res-section{margin-bottom:1.5rem}
+.res-section h3{font-size:13px;font-weight:500;color:var(--text);margin-bottom:0.35rem;font-family:'DM Serif Display',serif}
+.res-section .res-sub{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+.res-list{list-style:none}
+.res-li{display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:border-color .15s;cursor:pointer}
+.res-li:hover{border-color:var(--blue)}
+.res-li-icon{width:32px;height:32px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.res-li-body{flex:1}
+.res-li-body strong{display:block;font-size:13px;color:var(--text);margin-bottom:2px}
+.res-li-body span{font-size:12px;color:var(--muted)}
+.res-li-arrow{font-size:12px;color:var(--muted)}
+
+/* ── TAKE ACTION ── */
+.take-action-hero{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;margin-bottom:1.5rem}
+.ta-tag{display:inline-block;background:var(--blue-light);color:#1a3670;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:4px;margin-bottom:0.6rem}
+.take-action-hero h2{font-size:22px;color:var(--text);margin-bottom:0.5rem}
+.take-action-hero p{font-size:13px;color:var(--muted);line-height:1.65}
+.ta-img{width:220px;height:140px;background:#d4d0c8;border-radius:10px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#888;font-size:11px}
+
+/* ── BTNS ── */
+.cta{display:inline-block;background:var(--navy);color:#e8eef8;font-size:13px;padding:10px 20px;border-radius:8px;cursor:pointer;border:none;margin-top:1rem;font-family:'DM Sans',sans-serif;transition:background .15s}
+.cta:hover{background:#1a3060}
+.cta-o{display:inline-block;background:transparent;color:#1a3060;font-size:13px;padding:10px 20px;border-radius:8px;cursor:pointer;border:1px solid var(--blue);margin-top:1rem;font-family:'DM Sans',sans-serif;transition:all .15s}
+.cta-o:hover{background:var(--blue-light)}
+
+/* ── BOT NAV ── */
+.bot-nav{display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.75rem;border-top:1px solid var(--border)}
+.btn-s{font-size:12px;padding:7px 14px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text);font-family:'DM Sans',sans-serif;transition:all .12s}
+.btn-s:hover{background:var(--sand)}
+.btn-s.pr{background:var(--navy);color:#e8eef8;border-color:var(--navy)}
+.btn-s.pr:hover{background:#1a3060}
+.dots{display:flex;gap:5px}
+.d{width:6px;height:6px;border-radius:50%;background:var(--border)}
+.d.on{background:var(--blue)}
+
+/* ── STEP NAV ── */
+.step-nav{display:flex;gap:6px;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:2px}
+.step{padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:var(--sand);color:var(--muted);transition:all .15s;white-space:nowrap}
+.step:hover{border-color:var(--blue);color:var(--text)}
+.step.on{background:var(--blue-light);border-color:var(--blue);color:#1a3070;font-weight:500}
+.step-panel{display:none}.step-panel.active{display:block}
+
+/* ── FAC VIEW ── */
+.fac-hero{background:var(--green-dark);padding:1.75rem 1.75rem 1.5rem}
+.fac-hero-tag{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#4caf80;margin-bottom:0.4rem}
+.fac-hero h2{font-size:20px;color:#c8f0d4;margin-bottom:0.35rem}
+.fac-hero p{font-size:12px;color:#6aaf80;line-height:1.6}
+.fac-body{padding:1.5rem 1.75rem}
+.fac-day-tabs{display:flex;gap:6px;margin-bottom:1.5rem;flex-wrap:wrap}
+.fday{padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:var(--sand);color:var(--muted);transition:all .15s}
+.fday:hover{border-color:#3a7a50;color:var(--text)}
+.fday.on{background:var(--green-light);border-color:#3a7a50;color:var(--green)}
+.fpanel{display:none}.fpanel.active{display:block}
+.tip-card{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+.tip-hd{display:flex;align-items:center;gap:10px;padding:0.85rem 1.1rem;background:var(--sand);border-bottom:1px solid var(--border)}
+.tip-ico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.tip-ico.g{background:var(--green-light)}
+.tip-ico.a{background:var(--amber-light)}
+.tip-ico.b{background:var(--blue-light)}
+.tip-ico.r{background:#fceaea}
+.tip-title{font-size:13px;font-weight:500;color:var(--text)}
+.tip-badge{margin-left:auto;font-size:10px;padding:2px 8px;border-radius:10px}
+.tb-g{background:var(--green-light);color:var(--green)}
+.tb-a{background:var(--amber-light);color:var(--amber-dark)}
+.tb-b{background:var(--blue-light);color:#1a3670}
+.tip-body{padding:0.85rem 1.1rem}
+.tip-body p{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:0.5rem}
+.tip-body p:last-child{margin-bottom:0}
+.tip-body ul{font-size:12px;color:var(--muted);line-height:1.7;padding-left:1rem;margin-top:0.25rem}
+.tip-body strong{color:var(--text)}
+.timing-row{display:grid;grid-template-columns:80px 1fr 70px;border-bottom:1px solid var(--border);align-items:center}
+.timing-row:last-child{border-bottom:none}
+.tr-t{font-size:11px;color:var(--muted);padding:8px 10px}
+.tr-a{font-size:12px;color:var(--text);padding:8px 10px}
+.tr-d{font-size:11px;color:var(--muted);padding:8px 10px;text-align:right}
+.script{background:#f4f7fc;border:1px solid #c4d0ea;border-radius:8px;padding:0.85rem 1.1rem;margin-top:0.75rem}
+.script-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;color:var(--blue);margin-bottom:0.4rem}
+.script p{font-size:12px;color:var(--text);line-height:1.7;font-style:italic}
+
+@media(max-width:620px){
+  .day-row{grid-template-columns:repeat(3,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .take-action-hero{grid-template-columns:1fr}
+  .ta-img{display:none}
+  .nav-links .ntl{font-size:11px;padding:0 9px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span class="logo">How to Stop a Nuclear War — Course</span>
+  <div class="nav-links">
+    <span class="ntl on" id="tab-s" onclick="switchView('s')">Student view</span>
+    <span class="ntl fac" id="tab-f" onclick="switchView('f')">Facilitator guide</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     STUDENT VIEW
+════════════════════════════════════ -->
+<div class="view active" id="view-s">
+
+  <!-- Day navigation -->
+  <div class="day-nav" id="dayNav">
+    <span class="dnl on" onclick="goDay(0)">Home</span>
+    <span class="dnl" onclick="goDay(1)">Day 1 — Intro &amp; Film</span>
+    <span class="dnl" onclick="goDay(2)">Day 2 — Atomic Art</span>
+    <span class="dnl" onclick="goDay(3)">Day 3 — Deterrence</span>
+    <span class="dnl" onclick="goDay(4)">Day 4 — Activism</span>
+    <span class="dnl" onclick="goDay(5)">Day 5 — Action Plan</span>
+    <span class="dnl" onclick="goDay(6)">Resources</span>
+  </div>
+
+  <!-- ── HOME ── -->
+  <div class="screen active" id="day0">
+    <div class="hero">
+      <div class="now-badge"><div class="now-dot"></div><span class="now-text">This is a live issue — not Cold War history</span></div>
+      <h1>Understanding nuclear risk &amp; your power to act</h1>
+      <p>A one-week course built around <em>How to Stop a Nuclear War</em>. No prior knowledge needed — just curiosity and a willingness to engage.</p>
+      <div class="hero-pills">
+        <span class="pill">5 days · college level</span>
+        <span class="pill">Visual · discussion · hands-on</span>
+        <span class="pill">Emotional check-ins included</span>
+      </div>
+    </div>
+    <div class="ca">
+      <div class="alert">
+        <div class="alert-icon">!</div>
+        <div class="alert-text"><strong>Why now?</strong> In 2025, India-Pakistan tensions reached their highest point in decades. Nine countries still hold ~12,500 nuclear warheads. This week connects those facts to what you can actually do.</div>
+      </div>
+
+      <!-- Vimeo trailer embed -->
+      <div class="sec-label">Watch the documentary trailer</div>
+      <div class="video-wrap">
+        <iframe src="https://player.vimeo.com/video/954033225?h=0&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <div class="sec-label">Week at a glance — click a day to begin</div>
+      <div class="day-row">
+        <div class="dc on" onclick="goDay(1)"><div class="dc-num">Day 1</div><div class="dc-title">Intro &amp; film screening</div><div class="dc-tags"><span class="mb mb-v">Visual</span><span class="mb mb-d">Discussion</span></div></div>
+        <div class="dc" onclick="goDay(2)"><div class="dc-num">Day 2</div><div class="dc-title">Atomic art in America</div><div class="dc-tags"><span class="mb mb-v">Visual</span><span class="mb mb-d">Discussion</span></div></div>
+        <div class="dc" onclick="goDay(3)"><div class="dc-num">Day 3</div><div class="dc-title">Deterrence &amp; ethics</div><div class="dc-tags"><span class="mb mb-d">Discussion</span><span class="mb mb-h">Hands-on</span></div></div>
+        <div class="dc" onclick="goDay(4)"><div class="dc-num">Day 4</div><div class="dc-title">Activism &amp; treaties</div><div class="dc-tags"><span class="mb mb-v">Visual</span><span class="mb mb-d">Discussion</span></div></div>
+        <div class="dc" onclick="goDay(5)"><div class="dc-num">Day 5</div><div class="dc-title">Your action plan</div><div class="dc-tags"><span class="mb mb-h">Hands-on</span></div></div>
+      </div>
+      <button class="cta" onclick="goDay(1)">Start Day 1 →</button>
+    </div>
+  </div>
+
+  <!-- ── DAY 1 ── -->
+  <div class="screen" id="day1">
+    <div class="mod-hd">
+      <div class="breadcrumb" onclick="goDay(0)">← Course home</div>
+      <h2 class="serif">Day 1 — Introduction &amp; film screening</h2>
+      <div class="mod-meta"><span>4 activities</span><span>·</span><span>Est. 5 hrs</span><span>·</span><span>No prior knowledge needed</span></div>
+    </div>
+    <div class="ca">
+      <div class="step-nav">
+        <div class="step on" onclick="goStep('d1',0)">Overview</div>
+        <div class="step" onclick="goStep('d1',1)">Pre-reading</div>
+        <div class="step" onclick="goStep('d1',2)">Film screening</div>
+        <div class="step" onclick="goStep('d1',3)">Discussion</div>
+        <div class="step" onclick="goStep('d1',4)">Reflection</div>
+      </div>
+
+      <!-- D1 Step 0: Overview -->
+      <div class="step-panel active" id="d1-0">
+        <div class="prog"><div class="prog-fill" style="width:0%"></div></div>
+        <div class="two-col">
+          <div>
+            <div class="sec-label">Why today matters</div>
+            <div class="card"><h3>The issue isn't history — it's now</h3><p>Most students arrive thinking nuclear war is a Cold War relic. Today, using the documentary and its context, we challenge that assumption together. By the end of Day 1 you'll understand how risk accumulates — and why your voice matters.</p></div>
+            <div class="sec-label" style="margin-top:0.85rem">Today's sequence</div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Pre-reading</strong> — Ch. 1 of <em>The Button</em> by Perry &amp; Collina</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Film screening</strong> — <em>How to Stop a Nuclear War</em> (~90 min)</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Discussion</strong> — Small group + full class on the film's arguments</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Reflection</strong> — Anonymous poll + written check-in</div></div>
+            <button class="cta" onclick="goStep('d1',1)">Begin: Pre-reading →</button>
+          </div>
+          <div>
+            <div class="sec-label">Key concepts introduced today</div>
+            <div class="card"><h3>Nuclear deterrence</h3><p>The logic that having nukes prevents their use — and why systems failures challenge this assumption.</p></div>
+            <div class="card"><h3>Risk by accident</h3><p>Most close calls were errors and miscommunication, not aggression. 1983's Able Archer nearly triggered a launch.</p></div>
+            <div class="card"><h3>Student agency</h3><p>The 1980s freeze movement shows students have moved nuclear policy before. This course is about what comes next.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- D1 Step 1: Pre-reading -->
+      <div class="step-panel" id="d1-1">
+        <div class="prog"><div class="prog-fill" style="width:25%"></div></div>
+        <div class="sec-label">Pre-reading</div>
+        <div class="excerpt"><p>"The danger is not that our leaders are evil. The danger is that the system we have built gives very little room for error — and in a crisis, error is almost guaranteed."</p></div>
+        <p class="cite">— William Perry &amp; Tom Collina, <em>The Button</em> (2020), Ch. 1 (paraphrased for discussion)</p>
+        <div class="card" style="margin-bottom:1.25rem">
+          <h3>Reading: <em>The Button</em> — Chapter 1</h3>
+          <p>Read pages 1–18. Focus on Perry's account of the moments when he, as Secretary of Defense, came close to recommending a nuclear strike based on false information. Pay attention to: how the decision was made, who was in the room, and how much time they had.</p>
+        </div>
+        <div class="freewrite-wrap">
+          <div class="fw-label">5-minute silent free write — after reading</div>
+          <p>What part of the reading surprised, interested, or confused you?</p>
+          <textarea placeholder="Write freely — this is just for you. No right or wrong answers."></textarea>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" onclick="goStep('d1',2)">Next: Film screening →</button>
+          <button class="cta-o" onclick="goStep('d1',0)">← Overview</button>
+        </div>
+      </div>
+
+      <!-- D1 Step 2: Film -->
+      <div class="step-panel" id="d1-2">
+        <div class="prog"><div class="prog-fill" style="width:50%"></div></div>
+        <div class="sec-label">Film screening</div>
+        <div class="alert blue" style="margin-bottom:1.25rem">
+          <div class="alert-icon" style="background:#4a7ec8">&#9825;</div>
+          <div class="alert-text" style="color:#1a3a6a"><strong style="color:#0f2550">Before you watch:</strong> Some imagery in this film may be difficult. It's okay to step away if needed. The facilitator will check in at the timestamp below — you don't have to engage with every moment.</div>
+        </div>
+        <div class="video-wrap" style="margin-bottom:1rem">
+          <iframe src="https://player.vimeo.com/video/954033225?h=0&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="cite" style="margin-bottom:1.25rem">Trailer shown above. Your facilitator will screen the full documentary during class time.</p>
+        <div class="clip-bar">
+          <div class="clip-btn"><div class="clip-tri"></div></div>
+          <div class="clip-info"><strong>Key timestamp to watch for — 00:18:40</strong>Able Archer 1983: how a NATO exercise nearly triggered a Soviet nuclear response — and what stopped it.</div>
+        </div>
+        <div class="freewrite-wrap">
+          <div class="fw-label">During viewing — jot notes as you watch</div>
+          <p>What moments surprised you? What questions came up?</p>
+          <textarea placeholder="Your notes here — informal, just for you."></textarea>
+        </div>
+        <button class="cta" onclick="goStep('d1',3)">Next: Discussion →</button>
+      </div>
+
+      <!-- D1 Step 3: Discussion -->
+      <div class="step-panel" id="d1-3">
+        <div class="prog"><div class="prog-fill" style="width:75%"></div></div>
+        <div class="sec-label">Discussion — answer first, then talk with classmates</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem">Answer each question on your own first. Once your class has answered, your facilitator will reveal results and open the floor for discussion.</p>
+
+        <div class="mcq-wrap" id="mcq-d1-1">
+          <div class="mcq-q"><div class="q-label">Question 1 — comprehension</div><p>According to the film, what is the primary driver of nuclear risk today?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-1')"><div class="opt-radio"></div>Deliberate first strikes by hostile states<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-1')"><div class="opt-radio"></div>Accidental launches or miscommunication under pressure<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-1')"><div class="opt-radio"></div>Terrorist acquisition of warheads<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-1')"><div class="opt-radio"></div>Breakdown of international inspection regimes<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d1-1',[12,61,14,13],[38,61,14,13])">See class results &amp; discuss →</button>
+          <div class="mcq-discuss">
+            <div class="d-label">Now discuss with a classmate or small group</div>
+            <p>The film argues that <em>accidental</em> risk is greater than intentional risk. Do you agree? Consider:</p>
+            <ul>
+              <li>What systems or protocols exist to prevent accidents?</li>
+              <li>Does the Able Archer example change how you think about deterrence?</li>
+              <li>What would have to change for you to feel safer?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mcq-wrap" id="mcq-d1-2">
+          <div class="mcq-q"><div class="q-label">Question 2 — analysis</div><p>The film frames nuclear risk as a <em>systems</em> problem rather than a political one. What does this mean for how we respond?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-2')"><div class="opt-radio"></div>Only governments and militaries can fix it — individuals have little role<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-2')"><div class="opt-radio"></div>Changing public understanding can shift political will, which changes systems<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-2')"><div class="opt-radio"></div>Technology solutions (AI, automation) are the only realistic path<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d1-2')"><div class="opt-radio"></div>The problem is too complex for any single approach to address<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d1-2',[8,54,18,20],[8,54,18,20])">See class results &amp; discuss →</button>
+          <div class="mcq-discuss">
+            <div class="d-label">Turn and talk — 3 minutes</div>
+            <p>Which answer do you find most compelling, and why? The film specifically highlights student activism as a lever for change. Does that feel realistic or idealistic to you?</p>
+            <ul>
+              <li>What examples of student-driven change can you think of?</li>
+              <li>Where do you see your own role after this week?</li>
+            </ul>
+          </div>
+        </div>
+
+        <button class="cta" onclick="goStep('d1',4)">Next: Reflection →</button>
+      </div>
+
+      <!-- D1 Step 4: Reflection -->
+      <div class="step-panel" id="d1-4">
+        <div class="prog"><div class="prog-fill" style="width:100%"></div></div>
+        <div class="alert blue" style="margin-bottom:1.25rem">
+          <div class="alert-icon" style="background:#4a7ec8">&#9825;</div>
+          <div class="alert-text" style="color:#1a3a6a"><strong style="color:#0f2550">Check in with yourself first.</strong> It's okay if today brought up strong feelings. Take a breath. You can skip any question.</div>
+        </div>
+        <div class="sec-label">Anonymous poll</div>
+        <div class="mcq-wrap" id="poll-d1" style="margin-bottom:1.5rem">
+          <div class="mcq-q"><div class="q-label">How are you feeling after today?</div><p>Choose the option that fits best — results are anonymous and shared with the class.</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'poll-d1')"><div class="opt-radio"></div>Motivated — I want to learn and do more<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'poll-d1')"><div class="opt-radio"></div>Surprised — I didn't know the risk was this current<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'poll-d1')"><div class="opt-radio"></div>Overwhelmed — this is a lot to take in<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'poll-d1')"><div class="opt-radio"></div>Skeptical — I want to see more evidence first<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('poll-d1',[38,27,22,13],[38,27,22,13])">See how your class feels →</button>
+          <div class="mcq-discuss"><div class="d-label">No discussion needed — just notice how the room feels together.</div><p>Your facilitator may acknowledge the results before moving on.</p></div>
+        </div>
+        <div class="freewrite-wrap">
+          <div class="fw-label">Exit reflection — 5 minutes</div>
+          <p>In 2–3 sentences: what surprised you most today, and why does it matter to you personally?</p>
+          <textarea placeholder="Write your reflection here. There are no wrong answers."></textarea>
+        </div>
+        <button class="cta" onclick="goDay(2)">Continue to Day 2 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DAY 2: ATOMIC ART ── -->
+  <div class="screen" id="day2">
+    <div class="mod-hd">
+      <div class="breadcrumb" onclick="goDay(0)">← Course home</div>
+      <h2 class="serif">Day 2 — Atomic Art in America</h2>
+      <div class="mod-meta"><span>4 activities</span><span>·</span><span>Est. 3 hrs</span><span>·</span><span>Visual &amp; discussion focused</span></div>
+    </div>
+    <div class="ca">
+      <div class="step-nav">
+        <div class="step on" onclick="goStep('d2',0)">Warm-up</div>
+        <div class="step" onclick="goStep('d2',1)">NYT 1945 Article</div>
+        <div class="step" onclick="goStep('d2',2)">Artwork 1 — Peterdi</div>
+        <div class="step" onclick="goStep('d2',3)">Artwork 2 — Dehner</div>
+        <div class="step" onclick="goStep('d2',4)">Artwork 3 — Moholy-Nagy</div>
+        <div class="step" onclick="goStep('d2',5)">Discussion</div>
+        <div class="step" onclick="goStep('d2',6)">Exit ticket</div>
+      </div>
+
+      <!-- D2-0: Warm-up -->
+      <div class="step-panel active" id="d2-0">
+        <div class="prog"><div class="prog-fill" style="width:0%"></div></div>
+        <div class="sec-label">Warm-up — opening question</div>
+        <div class="disc-box" style="margin-bottom:1.25rem">
+          <div class="disc-label">Opening discussion prompt</div>
+          <p>How has nuclear war been represented in media you've encountered? Consider films, TV, books, music, or visual art.</p>
+        </div>
+        <div class="card" style="margin-bottom:1rem">
+          <h3>Some examples students often mention</h3>
+          <p><em>The 100</em> (series), <em>Oppenheimer</em> (film), <em>Planet of the Apes</em> (series), <em>Thirteen Days</em> (book &amp; film)</p>
+        </div>
+
+        <div class="mcq-wrap" id="mcq-d2-warmup">
+          <div class="mcq-q"><div class="q-label">Your initial reaction</div><p>What emotion do these nuclear portrayals most often evoke in you?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-warmup')"><div class="opt-radio"></div>Fear — they feel realistic and alarming<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-warmup')"><div class="opt-radio"></div>Fascination — I find the topic compelling<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-warmup')"><div class="opt-radio"></div>Apathy — it feels distant and unlikely<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-warmup')"><div class="opt-radio"></div>Confusion — I don't have enough context to feel strongly<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d2-warmup',[31,28,24,17],[31,28,24,17])">See class results &amp; discuss →</button>
+          <div class="mcq-discuss">
+            <div class="d-label">Follow-up — turn and talk</div>
+            <p>Do these portrayals feel realistic or exaggerated? Do they make nuclear war feel distant or immediate? Share with a classmate before we look at how artists responded in 1945.</p>
+          </div>
+        </div>
+
+        <div class="excerpt" style="margin-top:1.25rem"><p>"We've been living under the threat of nuclear war for over 80 years. After the bombings of Hiroshima and Nagasaki in 1945, people grappled with uncertainty and fear. Much of the art from the 1940s–1960s turned toward abstraction as a means to express emotions that were difficult to put into words."</p></div>
+        <p class="cite">Abstraction: using distorted forms, surreal imagery, and biomorphic shapes to express the inexpressible.</p>
+        <button class="cta" onclick="goStep('d2',1)">Next: NYT 1945 Article →</button>
+      </div>
+
+      <!-- D2-1: NYT Article -->
+      <div class="step-panel" id="d2-1">
+        <div class="prog"><div class="prog-fill" style="width:14%"></div></div>
+        <div class="sec-label">Activity 1 — New York Times Article, August 12, 1945</div>
+        <div class="card" style="margin-bottom:1rem">
+          <h3>"We Enter a New Era — the Atomic Age"</h3>
+          <p>This article was published on August 12, 1945 — just six days after Hiroshima and three days after Nagasaki. This is how the atomic bombing was initially explained to the American public.</p>
+        </div>
+        <div class="clip-bar" style="margin-bottom:1.25rem">
+          <div class="clip-btn"><div class="clip-tri"></div></div>
+          <div class="clip-info"><strong>Read the full article</strong>nytimes.com — "We Enter a New Era: the Atomic Age" — Harry M. Davis, Aug. 12, 1945</div>
+        </div>
+        <div class="alert" style="margin-bottom:1.25rem">
+          <div class="alert-icon">!</div>
+          <div class="alert-text"><strong>If time is limited:</strong> Read the opening through paragraph 5 ("…has startled all who pause to think"), then skip to paragraph 16 ("The magnitude of the powers thus put…") through to the end.</div>
+        </div>
+        <div class="freewrite-wrap">
+          <div class="fw-label">5-minute silent free write — after reading</div>
+          <p>What part of the article surprised, interested, or confused you?</p>
+          <textarea placeholder="Write freely — informal, just for you."></textarea>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" onclick="goStep('d2',2)">Next: First artwork →</button>
+          <button class="cta-o" onclick="goStep('d2',0)">← Warm-up</button>
+        </div>
+      </div>
+
+      <!-- D2-2: Peterdi -->
+      <div class="step-panel" id="d2-2">
+        <div class="prog"><div class="prog-fill" style="width:28%"></div></div>
+        <div class="sec-label">Activity 2 — Artwork 1 of 3</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem">Look at the artwork below first — without reading the context. Share your initial reactions before revealing the background.</p>
+        <div class="art-card">
+          <div class="art-img-wrap">
+            <div class="art-img-placeholder">
+              <div class="art-title-placeholder">Gabor Peterdi — Nervous Lobster, 1947</div>
+              <div>Oil on canvas, 34 × 44½"</div>
+              <div style="margin-top:8px;font-size:11px;color:#666">[Image shown by facilitator on screen]</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-caption">Gabor Peterdi, <em>Nervous Lobster</em>, 1947. Oil on canvas, 34 × 44½"</div>
+            <div class="art-reaction-prompt">Before you read anything: What do you see? What do you feel? What questions come up?</div>
+            <button class="art-reveal-btn" onclick="revealArt(this)">Reveal artist context →</button>
+            <div class="art-context">
+              <p>Gabor Peterdi was a Hungarian-American artist who studied in Italy before immigrating to the United States in 1939. He enlisted in the US Army and fought in Europe during World War II, then established and directed the Graphic Workshop at the Brooklyn Museum Art School. His work explores vulnerability and tension. This piece was created using etching and gaufrage (embossing on metal plates) on zinc.</p>
+              <div class="interp-label">Possible interpretations</div>
+              <ul>
+                <li>The distorted lobster can be read as a symbol of nature's fragility under technological pressure</li>
+                <li>The mechanical quality reflects an unease about how technology and nature have become entangled</li>
+                <li>The red coloring signals anxiety about the increasing influence of technology on society</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" onclick="goStep('d2',3)">Next: Artwork 2 →</button>
+          <button class="cta-o" onclick="goStep('d2',1)">← Article</button>
+        </div>
+      </div>
+
+      <!-- D2-3: Dehner -->
+      <div class="step-panel" id="d2-3">
+        <div class="prog"><div class="prog-fill" style="width:42%"></div></div>
+        <div class="sec-label">Activity 2 — Artwork 2 of 3</div>
+        <div class="art-card">
+          <div class="art-img-wrap">
+            <div class="art-img-placeholder">
+              <div class="art-title-placeholder">Dorothy Dehner — Woman #2, 1954</div>
+              <div>Watercolor and ink on paper, 22¾ × 18"</div>
+              <div style="margin-top:8px;font-size:11px;color:#666">[Image shown by facilitator on screen]</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-caption">Dorothy Dehner, <em>Woman #2</em>, 1954. Watercolor and ink on paper, 22¾ × 18"</div>
+            <div class="art-reaction-prompt">Look first — what do you see? What feelings or questions come up before you read anything?</div>
+            <button class="art-reveal-btn" onclick="revealArt(this)">Reveal artist context →</button>
+            <div class="art-context">
+              <p>Dorothy Dehner was an American painter and sculptor born in 1901 in Cleveland, Ohio, known for her abstract work. After her divorce in 1950, she became more professionally active and studied printmaking at William Stanley Hayter's Atelier 17. Her work after 1950 focused on individuals' personal stories in the Atomic Age.</p>
+              <div class="interp-label">Possible interpretations</div>
+              <ul>
+                <li>Meant to express an internal psychological impact rather than an external threat</li>
+                <li>Interpreted by many as a human-centered response to the Atomic Age — survival and identity, not politics</li>
+                <li>The fragmented, looping forms may represent the tension between individual identity and social instability</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" onclick="goStep('d2',4)">Next: Artwork 3 →</button>
+          <button class="cta-o" onclick="goStep('d2',2)">← Artwork 1</button>
+        </div>
+      </div>
+
+      <!-- D2-4: Moholy-Nagy -->
+      <div class="step-panel" id="d2-4">
+        <div class="prog"><div class="prog-fill" style="width:57%"></div></div>
+        <div class="sec-label">Activity 2 — Artwork 3 of 3</div>
+        <div class="art-card">
+          <div class="art-img-wrap">
+            <div class="art-img-placeholder">
+              <div class="art-title-placeholder">László Moholy-Nagy — Nuclear II, 1946</div>
+              <div>Abstract oil painting (dimensions TBC)</div>
+              <div style="margin-top:8px;font-size:11px;color:#666">[Image shown by facilitator on screen]</div>
+            </div>
+          </div>
+          <div class="art-body">
+            <div class="art-caption">László Moholy-Nagy, <em>Nuclear II</em>, 1946. Oil on canvas (dimensions to be confirmed)</div>
+            <div class="art-reaction-prompt">Look first — what do you see? What do the shapes, colors, or composition make you feel?</div>
+            <button class="art-reveal-btn" onclick="revealArt(this)">Reveal artist context →</button>
+            <div class="art-context">
+              <p>László Moholy-Nagy was a Hungarian painter and photographer, heavily influenced by constructivism. He was a strong advocate for integrating technology into the arts. This abstract oil painting, composed of geometric shapes and muted colors, was made in response to the atomic bombings of Hiroshima and Nagasaki — while Moholy-Nagy was recovering from cancer.</p>
+              <div class="interp-label">Possible interpretations</div>
+              <ul>
+                <li>A more structured and even optimistic reading of nuclear energy — technology as progress</li>
+                <li>The white squares and triangles suggest missile-like shapes beneath the geometry</li>
+                <li>The vibrant colors could celebrate nuclear technology as a source of renewal — but raises the question: can we separate nuclear power from nuclear weapons?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="cta" onclick="goStep('d2',5)">Next: Full discussion →</button>
+          <button class="cta-o" onclick="goStep('d2',3)">← Artwork 2</button>
+        </div>
+      </div>
+
+      <!-- D2-5: Discussion -->
+      <div class="step-panel" id="d2-5">
+        <div class="prog"><div class="prog-fill" style="width:71%"></div></div>
+        <div class="sec-label">Discussion — art, journalism, and emotional truth</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem">Answer individually first, then discuss with a partner before sharing with the full class.</p>
+
+        <div class="mcq-wrap" id="mcq-d2-disc1">
+          <div class="mcq-q"><div class="q-label">Discussion question 1</div><p>In your view, is art or journalism more effective at conveying the emotional truth of an event like Hiroshima?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-disc1')"><div class="opt-radio"></div>Art — it captures feeling and ambiguity that facts can't<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-disc1')"><div class="opt-radio"></div>Journalism — evidence and clarity build more lasting understanding<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-disc1')"><div class="opt-radio"></div>Both are needed — they work on different registers<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d2-disc1')"><div class="opt-radio"></div>Neither fully captures it — lived experience is irreplaceable<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d2-disc1',[22,19,47,12],[22,19,47,12])">See class results &amp; discuss →</button>
+          <div class="mcq-discuss">
+            <div class="d-label">Full class discussion prompts</div>
+            <ul>
+              <li>What is the overall tone and message of the 1945 NYT article?</li>
+              <li>How does that tone compare to the emotions in the artworks?</li>
+              <li>Why might media and artists portray the same event so differently?</li>
+              <li>Do you think nuclear war is over-sensationalized, underrepresented, or misunderstood in today's media?</li>
+            </ul>
+          </div>
+        </div>
+        <button class="cta" onclick="goStep('d2',6)">Next: Exit ticket →</button>
+      </div>
+
+      <!-- D2-6: Exit ticket -->
+      <div class="step-panel" id="d2-6">
+        <div class="prog"><div class="prog-fill" style="width:100%"></div></div>
+        <div class="sec-label">Exit ticket</div>
+        <div class="freewrite-wrap">
+          <div class="fw-label">Option 1 — written reflection</div>
+          <p>After today's discussion, has your perception of nuclear war changed? How?</p>
+          <textarea placeholder="Write 2–3 sentences. There are no wrong answers."></textarea>
+        </div>
+        <div class="card">
+          <h3>Option 2 — sketch</h3>
+          <p>Draw a quick sketch of your interpretation of one of the concepts or artworks from today. Hand it to your facilitator as you leave.</p>
+        </div>
+        <button class="cta" onclick="goDay(3)">Continue to Day 3 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DAY 3 ── -->
+  <div class="screen" id="day3">
+    <div class="mod-hd">
+      <div class="breadcrumb" onclick="goDay(0)">← Course home</div>
+      <h2 class="serif">Day 3 — Deterrence, ethics &amp; the human cost</h2>
+      <div class="mod-meta"><span>4 activities</span><span>·</span><span>Est. 4 hrs</span><span>·</span><span>Discussion &amp; hands-on</span></div>
+    </div>
+    <div class="ca">
+      <div class="step-nav">
+        <div class="step on" onclick="goStep('d3',0)">Overview</div>
+        <div class="step" onclick="goStep('d3',1)">Reading</div>
+        <div class="step" onclick="goStep('d3',2)">Film clip</div>
+        <div class="step" onclick="goStep('d3',3)">Discussion</div>
+        <div class="step" onclick="goStep('d3',4)">Short essay</div>
+      </div>
+      <div class="step-panel active" id="d3-0">
+        <div class="prog"><div class="prog-fill" style="width:0%"></div></div>
+        <div class="alert" style="margin-bottom:1.25rem"><div class="alert-icon">!</div><div class="alert-text"><strong>Today's focus:</strong> Is deterrence morally defensible? We look at the ethics of nuclear strategy, the human cost of near-misses, and what it would take to change course.</div></div>
+        <div class="two-col">
+          <div>
+            <div class="sec-label">Today's sequence</div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Reading</strong> — Supplemental chapter from <em>Command and Control</em></div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Film clip</strong> — <em>How to Stop a Nuclear War</em> — selected timestamp</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Discussion</strong> — Is deterrence morally justified?</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Short essay</strong> — 300 words on deterrence ethics (graded)</div></div>
+            <button class="cta" onclick="goStep('d3',1)">Begin →</button>
+          </div>
+          <div>
+            <div class="sec-label">Key questions for today</div>
+            <div class="card"><h3>Can deterrence be moral?</h3><p>If the threat of mass destruction is what prevents it, does that make the threat itself ethical?</p></div>
+            <div class="card"><h3>Who bears the cost?</h3><p>Environmental contamination, testing in Indigenous lands, and the communities near weapons facilities.</p></div>
+            <div class="card"><h3>What would change look like?</h3><p>Exploring the No First Use Act, TPNW, and unilateral steps nations have already taken.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-panel" id="d3-1"><div class="prog"><div class="prog-fill" style="width:25%"></div></div><div class="sec-label">Reading — <em>Command and Control</em>, Eric Schlosser</div><div class="card"><h3>Assignment</h3><p>Read the assigned excerpt (provided by your facilitator). Focus on the 1980 Damascus Titan missile accident — what happened, who made decisions, and how close it came to detonation.</p></div><div class="freewrite-wrap"><div class="fw-label">Reading response</div><p>What does the Damascus incident reveal about the relationship between human error and nuclear systems?</p><textarea placeholder="Your thoughts here — 5 minutes, free write."></textarea></div><button class="cta" onclick="goStep('d3',2)">Next: Film clip →</button></div>
+      <div class="step-panel" id="d3-2"><div class="prog"><div class="prog-fill" style="width:50%"></div></div><div class="sec-label">Film reference</div><div class="clip-bar"><div class="clip-btn"><div class="clip-tri"></div></div><div class="clip-info"><strong>How to Stop a Nuclear War — facilitator-selected timestamp</strong>Your facilitator will cue the relevant segment on deterrence and humanitarian consequences.</div></div><div class="freewrite-wrap"><div class="fw-label">Viewing notes</div><p>What argument does the film make about deterrence? Do you find it convincing?</p><textarea placeholder="Notes here."></textarea></div><button class="cta" onclick="goStep('d3',3)">Next: Discussion →</button></div>
+      <div class="step-panel" id="d3-3">
+        <div class="prog"><div class="prog-fill" style="width:75%"></div></div>
+        <div class="mcq-wrap" id="mcq-d3-1">
+          <div class="mcq-q"><div class="q-label">Discussion question</div><p>Nuclear deterrence requires the credible threat of mass civilian casualties. Can this be morally justified?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d3-1')"><div class="opt-radio"></div>Yes — preventing war through threat is a legitimate moral choice<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d3-1')"><div class="opt-radio"></div>No — threatening mass murder is wrong regardless of outcome<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d3-1')"><div class="opt-radio"></div>It depends — context, alternatives, and intentions matter<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d3-1')"><div class="opt-radio"></div>I'm genuinely unsure — I need more information<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d3-1',[24,31,33,12],[24,31,33,12])">See class results &amp; discuss →</button>
+          <div class="mcq-discuss"><div class="d-label">Full class discussion</div><p>How does your answer change (if at all) when you consider the communities who bear the environmental and health costs of nuclear testing and storage — without any say in the policy?</p></div>
+        </div>
+        <button class="cta" onclick="goStep('d3',4)">Next: Short essay →</button>
+      </div>
+      <div class="step-panel" id="d3-4"><div class="prog"><div class="prog-fill" style="width:100%"></div></div><div class="sec-label">Short essay — graded</div><div class="disc-box"><div class="disc-label">Essay prompt</div><p>In approximately 300 words, argue for or against the moral justification of nuclear deterrence. Use at least one example from today's reading or film clip to support your position.</p></div><div class="freewrite-wrap"><div class="fw-label">Draft your essay here</div><p>You'll submit this to your facilitator at the end of the day.</p><textarea placeholder="Your essay draft..." style="min-height:160px"></textarea></div><button class="cta" onclick="goDay(4)">Continue to Day 4 →</button></div>
+    </div>
+  </div>
+
+  <!-- ── DAY 4 ── -->
+  <div class="screen" id="day4">
+    <div class="mod-hd">
+      <div class="breadcrumb" onclick="goDay(0)">← Course home</div>
+      <h2 class="serif">Day 4 — Activism, treaties &amp; pathways to change</h2>
+      <div class="mod-meta"><span>4 activities</span><span>·</span><span>Est. 4 hrs</span><span>·</span><span>Visual &amp; discussion</span></div>
+    </div>
+    <div class="ca">
+      <div class="step-nav">
+        <div class="step on" onclick="goStep('d4',0)">Overview</div>
+        <div class="step" onclick="goStep('d4',1)">TPNW reading</div>
+        <div class="step" onclick="goStep('d4',2)">Case studies</div>
+        <div class="step" onclick="goStep('d4',3)">Discussion</div>
+        <div class="step" onclick="goStep('d4',4)">Action mapping</div>
+      </div>
+      <div class="step-panel active" id="d4-0">
+        <div class="prog"><div class="prog-fill" style="width:0%"></div></div>
+        <div class="two-col">
+          <div>
+            <div class="sec-label">Today's focus</div>
+            <div class="card"><h3>From understanding to action</h3><p>Days 1–3 built your understanding of the problem. Today we look at how change actually happens — through treaties, movements, and individual action — and begin mapping your own pathway.</p></div>
+            <div class="tl-item" style="margin-top:1rem"><div class="tl-dot"></div><div class="tl-text"><strong>TPNW reading</strong> — Treaty on the Prohibition of Nuclear Weapons (primary source)</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Case studies</strong> — The 1980s freeze movement &amp; ICAN's Nobel campaign</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Discussion</strong> — What makes activism effective?</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Action mapping</strong> — Draft your civic action pathway for Day 5</div></div>
+            <button class="cta" onclick="goStep('d4',1)">Begin →</button>
+          </div>
+          <div>
+            <div class="sec-label">Key frameworks</div>
+            <div class="card"><h3>Treaty-based change</h3><p>How international law constrains (and sometimes changes) state behavior — and who drives those treaties.</p></div>
+            <div class="card"><h3>Movement-based change</h3><p>From SANE to the Nuclear Freeze to ICAN — how civil society moves policy.</p></div>
+            <div class="card"><h3>Individual action</h3><p>Writing, organizing, voting, running for office — the concrete steps available to any student.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-panel" id="d4-1"><div class="prog"><div class="prog-fill" style="width:25%"></div></div><div class="sec-label">Primary source — TPNW</div><div class="card"><h3>Treaty on the Prohibition of Nuclear Weapons (2021)</h3><p>Read Articles 1–4 of the TPNW, provided by your facilitator. Focus on: what states agree to prohibit, how verification works, and which major powers have not signed.</p></div><div class="freewrite-wrap"><div class="fw-label">Reading response</div><p>What surprised you about the treaty? What do you think explains why the US, Russia, and China have not signed?</p><textarea placeholder="Free write — 5 minutes."></textarea></div><button class="cta" onclick="goStep('d4',2)">Next: Case studies →</button></div>
+      <div class="step-panel" id="d4-2"><div class="prog"><div class="prog-fill" style="width:50%"></div></div><div class="sec-label">Case studies — movements that moved policy</div><div class="card" style="margin-bottom:0.75rem"><h3>The Nuclear Freeze Movement (1980s)</h3><p>One million people rallied in Central Park in 1982. Within a decade, the US and USSR had signed the INF Treaty. How did a student-led movement become a global force — and what were its limits?</p></div><div class="card"><h3>ICAN's Nobel Prize campaign</h3><p>The International Campaign to Abolish Nuclear Weapons won the 2017 Nobel Peace Prize three years after the TPNW negotiations began. A coalition of NGOs, not governments, drove the process. What does this tell us about where power sits?</p></div><button class="cta" onclick="goStep('d4',3)">Next: Discussion →</button></div>
+      <div class="step-panel" id="d4-3">
+        <div class="prog"><div class="prog-fill" style="width:75%"></div></div>
+        <div class="mcq-wrap" id="mcq-d4-1">
+          <div class="mcq-q"><div class="q-label">Discussion question</div><p>Which lever for change do you find most credible after today's case studies?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d4-1')"><div class="opt-radio"></div>International treaties and legal frameworks<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d4-1')"><div class="opt-radio"></div>Grassroots movements and public pressure<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d4-1')"><div class="opt-radio"></div>Electoral politics — voting and running for office<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d4-1')"><div class="opt-radio"></div>Media and cultural change — shifting how people think<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d4-1',[21,38,22,19],[21,38,22,19])">See class results &amp; discuss →</button>
+          <div class="mcq-discuss"><div class="d-label">Discussion prompts</div><p>How do these levers interact? Can one work without the others? Where do you see yourself fitting in?</p></div>
+        </div>
+        <button class="cta" onclick="goStep('d4',4)">Next: Action mapping →</button>
+      </div>
+      <div class="step-panel" id="d4-4"><div class="prog"><div class="prog-fill" style="width:100%"></div></div><div class="sec-label">Action mapping — prepare for Day 5</div><div class="disc-box"><div class="disc-label">Assignment</div><p>Draft an outline of your Day 5 civic action brief. Identify: (1) one specific problem from the course, (2) one lever for change, (3) one concrete step you or your community could take, (4) one source of evidence from the course.</p></div><div class="freewrite-wrap"><div class="fw-label">Your outline</div><p>This is a working draft — you'll develop it into a 2-page brief for Day 5.</p><textarea placeholder="Problem: ...\nLever: ...\nConcrete step: ...\nEvidence: ..." style="min-height:140px"></textarea></div><button class="cta" onclick="goDay(5)">Continue to Day 5 →</button></div>
+    </div>
+  </div>
+
+  <!-- ── DAY 5 ── -->
+  <div class="screen" id="day5">
+    <div class="mod-hd">
+      <div class="breadcrumb" onclick="goDay(0)">← Course home</div>
+      <h2 class="serif">Day 5 — Your civic action plan</h2>
+      <div class="mod-meta"><span>3 activities</span><span>·</span><span>Est. 4 hrs</span><span>·</span><span>Hands-on &amp; presentations</span></div>
+    </div>
+    <div class="ca">
+      <div class="step-nav">
+        <div class="step on" onclick="goStep('d5',0)">Overview</div>
+        <div class="step" onclick="goStep('d5',1)">Finalize brief</div>
+        <div class="step" onclick="goStep('d5',2)">Presentations</div>
+        <div class="step" onclick="goStep('d5',3)">Course close</div>
+      </div>
+      <div class="step-panel active" id="d5-0">
+        <div class="prog"><div class="prog-fill" style="width:0%"></div></div>
+        <div class="card" style="margin-bottom:1rem"><h3>Today: from learning to doing</h3><p>You've spent four days understanding the problem. Today you present your answer: one concrete, evidence-based step toward reducing nuclear risk — and make the case for why it matters.</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-text"><strong>Finalize</strong> — Complete your 2-page civic action brief</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Present</strong> — 3-minute presentations to the class (with Q&amp;A)</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:#7a92be"></div><div class="tl-text"><strong>Close</strong> — Final reflection and course wrap-up</div></div>
+        <button class="cta" onclick="goStep('d5',1)">Begin →</button>
+      </div>
+      <div class="step-panel" id="d5-1"><div class="prog"><div class="prog-fill" style="width:33%"></div></div><div class="sec-label">Civic action brief — final draft</div><div class="disc-box"><div class="disc-label">Brief requirements (2 pages)</div><p>1. Identify one specific, current nuclear risk<br>2. Name one realistic lever for change (treaty, movement, policy, media)<br>3. Propose one concrete step you or your community could take<br>4. Cite at least two sources from the course<br>5. End with a call to action for your classmates</p></div><div class="freewrite-wrap"><div class="fw-label">Final draft</div><p>Write your complete brief here or on paper to hand in.</p><textarea placeholder="Your civic action brief..." style="min-height:200px"></textarea></div><button class="cta" onclick="goStep('d5',2)">Next: Presentations →</button></div>
+      <div class="step-panel" id="d5-2"><div class="prog"><div class="prog-fill" style="width:66%"></div></div><div class="sec-label">Presentations</div><div class="card"><h3>3-minute presentations</h3><p>Each student presents their civic action brief to the class. After each presentation, the class has 2 minutes for questions. Your facilitator will keep time.</p></div><div class="disc-box" style="margin-top:1rem"><div class="disc-label">Peer feedback prompt</div><p>As you listen to each presentation: What is the most compelling part of their argument? What question would you want them to explore further?</p></div><button class="cta" onclick="goStep('d5',3)">Next: Course close →</button></div>
+      <div class="step-panel" id="d5-3">
+        <div class="prog"><div class="prog-fill" style="width:100%"></div></div>
+        <div class="sec-label">Course close</div>
+        <div class="mcq-wrap" id="mcq-d5-close">
+          <div class="mcq-q"><div class="q-label">Final reflection</div><p>Compared to Day 1, how has your sense of personal agency on nuclear issues changed?</p></div>
+          <div class="mcq-opts">
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d5-close')"><div class="opt-radio"></div>Much more — I now see concrete things I can do<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d5-close')"><div class="opt-radio"></div>Somewhat more — I understand better but still feel uncertain<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d5-close')"><div class="opt-radio"></div>About the same — the scale of the problem still feels overwhelming<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+            <div class="mcq-opt" onclick="mcqPick(this,'mcq-d5-close')"><div class="opt-radio"></div>Less — learning more made me feel less hopeful<div class="opt-bar-wrap"><div class="opt-bar"></div></div><div class="opt-pct"></div></div>
+          </div>
+          <button class="mcq-reveal-btn" onclick="mcqReveal('mcq-d5-close',[48,33,14,5],[48,33,14,5])">See how your class finishes →</button>
+          <div class="mcq-discuss"><div class="d-label">Final discussion — no wrong answers</div><p>What is the one thing you'll take from this week?</p></div>
+        </div>
+        <div class="freewrite-wrap" style="margin-top:1rem">
+          <div class="fw-label">Final written reflection</div>
+          <p>What is one thing you'll actually do differently after this course?</p>
+          <textarea placeholder="Your reflection here."></textarea>
+        </div>
+        <button class="cta" onclick="goDay(6)">See resources &amp; next steps →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RESOURCES ── -->
+  <div class="screen" id="day6">
+    <div class="ca" style="padding-top:2rem">
+      <div class="take-action-hero">
+        <div>
+          <div class="ta-tag">Take action</div>
+          <h2 class="serif">Take action — organizations</h2>
+          <p>Learning is only the beginning. These organizations work every day to reduce nuclear risk and build a safer world. Explore, engage, and consider how you can contribute.</p>
+        </div>
+        <div class="ta-img">Photo placeholder</div>
+      </div>
+
+      <ul class="res-list">
+        <li class="res-li"><div class="res-li-icon">&#127760;</div><div class="res-li-body"><strong>International Campaign to Abolish Nuclear Weapons (ICAN)</strong><span>Nobel Prize–winning coalition working toward a global treaty to ban nuclear weapons.</span></div><div class="res-li-arrow">↗</div></li>
+        <li class="res-li"><div class="res-li-icon">&#127760;</div><div class="res-li-body"><strong>Ploughshares Fund</strong><span>Funds research and advocacy to reduce and eventually eliminate nuclear weapons worldwide.</span></div><div class="res-li-arrow">↗</div></li>
+        <li class="res-li"><div class="res-li-icon">&#127760;</div><div class="res-li-body"><strong>Arms Control Association</strong><span>Provides authoritative information and analysis on arms control and disarmament policy.</span></div><div class="res-li-arrow">↗</div></li>
+        <li class="res-li"><div class="res-li-icon">&#127760;</div><div class="res-li-body"><strong>Global Zero</strong><span>International movement for the elimination of all nuclear weapons through phased agreements.</span></div><div class="res-li-arrow">↗</div></li>
+        <li class="res-li"><div class="res-li-icon">&#127760;</div><div class="res-li-body"><strong>Bulletin of the Atomic Scientists</strong><span>Publishes the Doomsday Clock and expert analysis on nuclear risk and global security threats.</span></div><div class="res-li-arrow">↗</div></li>
+        <li class="res-li"><div class="res-li-icon">&#127760;</div><div class="res-li-body"><strong>Back from the Brink</strong><span>U.S. grassroots campaign with chapters at 200+ universities. Host a screening at your school.</span></div><div class="res-li-arrow">↗</div></li>
+      </ul>
+
+      <div style="margin-top:2rem" class="res-section">
+        <h3>Course readings</h3>
+        <div class="res-sub">Required and supplemental texts for the week.</div>
+        <ul class="res-list">
+          <li class="res-li"><div class="res-li-icon">&#128218;</div><div class="res-li-body"><strong>The Button — Perry &amp; Collina</strong><span>Required · Days 1–2 · Ch. 1–4</span></div></li>
+          <li class="res-li"><div class="res-li-icon">&#128218;</div><div class="res-li-body"><strong>Command and Control — Eric Schlosser</strong><span>Supplemental · Day 3 · Systems &amp; accidents</span></div></li>
+          <li class="res-li"><div class="res-li-icon">&#128218;</div><div class="res-li-body"><strong>Nuclear Folly — Serhii Plokhy</strong><span>Supplemental · Day 2 · Cold War &amp; today</span></div></li>
+          <li class="res-li"><div class="res-li-icon">&#128196;</div><div class="res-li-body"><strong>Treaty on the Prohibition of Nuclear Weapons (TPNW)</strong><span>Primary source · Day 4</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /student view -->
+
+<!-- ════════════════════════════════════
+     FACILITATOR VIEW
+════════════════════════════════════ -->
+<div class="view" id="view-f">
+  <div class="fac-hero">
+    <div class="fac-hero-tag">Facilitator guide — for instructors &amp; group leaders</div>
+    <h2>Everything you need to run the course</h2>
+    <p>Scripts, timing blocks, emotional safety protocols, and activity notes for each day. Select a day below.</p>
+  </div>
+  <div class="fac-body">
+    <div class="fac-day-tabs">
+      <div class="fday on" onclick="fday(1)">Day 1</div>
+      <div class="fday" onclick="fday(2)">Day 2 — Art</div>
+      <div class="fday" onclick="fday(3)">Day 3</div>
+      <div class="fday" onclick="fday(4)">Day 4</div>
+      <div class="fday" onclick="fday(5)">Day 5</div>
+    </div>
+
+    <!-- FAC DAY 1 -->
+    <div class="fpanel active" id="fp1">
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico g">&#9200;</div><div class="tip-title">Day 1 — Timing overview</div><span class="tip-badge tb-g">~5 hrs</span></div>
+        <div class="tip-body">
+          <div class="timing-row"><div class="tr-t">9:00 am</div><div class="tr-a">Welcome, grounding exercise, opt-out reminder</div><div class="tr-d">30 min</div></div>
+          <div class="timing-row"><div class="tr-t">9:30 am</div><div class="tr-a">Pre-reading — <em>The Button</em> Ch. 1 + free write</div><div class="tr-d">60 min</div></div>
+          <div class="timing-row"><div class="tr-t">11:00 am</div><div class="tr-a">Film screening — <em>How to Stop a Nuclear War</em></div><div class="tr-d">90 min</div></div>
+          <div class="timing-row"><div class="tr-t">2:00 pm</div><div class="tr-a">Discussion questions (MCQ + class debrief)</div><div class="tr-d">45 min</div></div>
+          <div class="timing-row"><div class="tr-t">2:45 pm</div><div class="tr-a">Anonymous poll + written reflection</div><div class="tr-d">20 min</div></div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico g">&#128100;</div><div class="tip-title">Opening grounding script</div><span class="tip-badge tb-g">Read aloud</span></div>
+        <div class="tip-body">
+          <div class="script"><div class="script-label">Opening script (word for word)</div><p>"Before we begin, I want to name something. The topic we're exploring this week is serious — it touches on fear, uncertainty, and real global stakes. It's okay to feel uncomfortable. There's no pressure to share anything you're not ready to share. If you need to step out at any point, please do. And if something comes up for you emotionally, come find me."</p></div>
+          <p style="margin-top:0.75rem">Follow with: 3 minutes of quiet breathing. Ask students to put phones away and take three slow breaths with you. No discussion yet.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico a">&#9888;</div><div class="tip-title">Film debrief — handling emotional responses</div><span class="tip-badge tb-a">Important</span></div>
+        <div class="tip-body">
+          <p>After the film, pause for 2 minutes of silence before opening discussion. Do not rush to fill the quiet.</p>
+          <p><strong>If students seem overwhelmed:</strong> "It's okay if this brought something up. You don't have to respond to everything right now. Let's take a breath together."</p>
+          <p><strong>If a student disengages:</strong> Don't call on them. Allow written responses as an alternative to speaking. The anonymous poll is specifically designed to give quieter students (Jason-type personas) a low-stakes entry point.</p>
+          <p><strong>If misinformation surfaces:</strong> "That's a perspective I've heard — let's look at what the film specifically says and then compare." Redirect to evidence, not correction.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico b">&#128161;</div><div class="tip-title">Discussion facilitation tips</div><span class="tip-badge tb-b">Pedagogy</span></div>
+        <div class="tip-body">
+          <p>The MCQ questions are designed so students answer privately first — this gives every student an opinion before peer pressure sets in.</p>
+          <p><strong>Recommended sequence:</strong> (1) Students answer individually, (2) Reveal class results on screen, (3) Ask: "What surprised you about the results?" before opening the floor.</p>
+          <p>Quieter students: Offer a "write first, then share" option. Ask them to write one sentence response before you call on anyone. This approach is especially effective for engineering/technical students who may feel less comfortable in debate formats.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAC DAY 2: ART -->
+    <div class="fpanel" id="fp2">
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico g">&#9200;</div><div class="tip-title">Day 2 — Timing overview (Atomic Art in America)</div><span class="tip-badge tb-g">~3 hrs</span></div>
+        <div class="tip-body">
+          <div class="timing-row"><div class="tr-t">9:00 am</div><div class="tr-a">Warm-up discussion — media representations of nuclear war</div><div class="tr-d">20 min</div></div>
+          <div class="timing-row"><div class="tr-t">9:20 am</div><div class="tr-a">Opening framing — Abstraction in the Atomic Age</div><div class="tr-d">10 min</div></div>
+          <div class="timing-row"><div class="tr-t">9:30 am</div><div class="tr-a">NYT Article (1945) — read + 5 min free write</div><div class="tr-d">40 min</div></div>
+          <div class="timing-row"><div class="tr-t">10:10 am</div><div class="tr-a">Artwork slideshow — 3 pieces (Peterdi, Dehner, Moholy-Nagy)</div><div class="tr-d">45 min</div></div>
+          <div class="timing-row"><div class="tr-t">10:55 am</div><div class="tr-a">Full class discussion — 7 guiding questions</div><div class="tr-d">30 min</div></div>
+          <div class="timing-row"><div class="tr-t">11:25 am</div><div class="tr-a">Exit ticket — written or sketch</div><div class="tr-d">10 min</div></div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico g">&#128100;</div><div class="tip-title">Opening framing script</div><span class="tip-badge tb-g">Read aloud</span></div>
+        <div class="tip-body">
+          <div class="script"><div class="script-label">Opening script</div><p>"We've been living under the threat of nuclear war for over 80 years. The examples you just mentioned reflect modern interpretations — but to understand how people first processed this threat, we can look at how artists responded during the early Atomic Age. After the bombings of Hiroshima and Nagasaki in 1945, people in the United States grappled with a lot of uncertainty and fear. Much of the art from the 1940s–1960s turned toward abstraction as a means to express emotions that were difficult to put into words. Abstraction means using distorted forms, surreal imagery, and biomorphic shapes — forms that suggest living things without being literal."</p></div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico b">&#127912;</div><div class="tip-title">Artwork slideshow instructions — all 3 pieces</div><span class="tip-badge tb-b">Activity guide</span></div>
+        <div class="tip-body">
+          <p><strong>For each artwork, follow this sequence:</strong></p>
+          <ul>
+            <li>Show the image without any title, artist, or context</li>
+            <li>Ask students: "What do you see? What do you feel? What questions come up?"</li>
+            <li>Allow 2–3 minutes of open sharing before revealing context</li>
+            <li>Provide the artist biography and interpretations</li>
+            <li>Ask: "Does knowing the context change how you see it?"</li>
+          </ul>
+          <p style="margin-top:0.75rem"><strong>Artwork introduction script:</strong></p>
+          <div class="script"><div class="script-label">Say before each artwork</div><p>"Now let's see how American artists responded to the same event. I'll show each piece first without any context. I'll ask you to share what you see, what you feel, and any questions that come up."</p></div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico b">&#128196;</div><div class="tip-title">Artist notes — Gabor Peterdi, Nervous Lobster (1947)</div></div>
+        <div class="tip-body">
+          <p>Peterdi was a Hungarian-American artist who studied in Italy before immigrating to the US in 1939. He enlisted in the US Army and fought in Europe in WWII, then established the Graphic Workshop at the Brooklyn Museum Art School.</p>
+          <p>This piece used etching and gaufrage (embossing on metal plates) on zinc. His work explores vulnerability and tension.</p>
+          <ul>
+            <li>The distorted lobster = symbol of nature's fragility under technological pressure</li>
+            <li>Mechanical quality = unease about technology and nature becoming entangled</li>
+            <li>Red coloring = anxiety about technology's increasing influence on society</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico b">&#128196;</div><div class="tip-title">Artist notes — Dorothy Dehner, Woman #2 (1954)</div></div>
+        <div class="tip-body">
+          <p>Dehner was an American painter and sculptor born in 1901 in Cleveland. Her early work focused on daily life, but after her divorce in 1950 she became more professionally active. She studied printmaking at Hayter's Atelier 17 and focused on personal stories in the Atomic Age.</p>
+          <ul>
+            <li>Meant to express internal psychological impact rather than external threat</li>
+            <li>Represents a human-centered response to the Atomic Age</li>
+            <li>Fragmented, looping forms = tension between identity and social instability</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico b">&#128196;</div><div class="tip-title">Artist notes — László Moholy-Nagy, Nuclear II (1946)</div></div>
+        <div class="tip-body">
+          <p>Moholy-Nagy was a Hungarian painter and photographer, influenced by constructivism. He advocated for integrating technology into the arts. This painting was made while he was recovering from cancer, in direct response to Hiroshima and Nagasaki.</p>
+          <ul>
+            <li>More structured, possibly optimistic reading of nuclear energy as progress</li>
+            <li>White squares/triangles suggest missile-like shapes</li>
+            <li>Vibrant colors may celebrate nuclear technology — but raises: can we separate nuclear power from nuclear weapons?</li>
+          </ul>
+          <p><strong>Note:</strong> Dimensions of this work are still being confirmed — update before class.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico a">&#128172;</div><div class="tip-title">Full class discussion — 7 guiding questions</div><span class="tip-badge tb-a">Pick 3–4</span></div>
+        <div class="tip-body">
+          <p><strong>Recommended format:</strong> Turn and talk (2 min) → full class (15–20 min). Option 2: full class from the start.</p>
+          <ul>
+            <li>What is the overall tone and message of the 1945 NYT article?</li>
+            <li>How does that tone compare to the emotions expressed in the artworks?</li>
+            <li>How do you think you would have reacted to this article at the time? To the artwork?</li>
+            <li>Why might the media and artists portray the same event so differently?</li>
+            <li>In what ways is art more effective (or less effective) than journalism at conveying emotional truth?</li>
+            <li>How do you think people in 1945 might have reacted to this article versus these artworks?</li>
+            <li>Do you think nuclear war is over-sensationalized, underrepresented, or misunderstood in today's media?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico g">&#128203;</div><div class="tip-title">Exit ticket — instructions</div></div>
+        <div class="tip-body">
+          <p>Pass around exit tickets (index cards or printed slips). Collect as students leave. Two options:</p>
+          <ul>
+            <li><strong>Option 1 (written):</strong> "After today's discussion, has your perception of nuclear war changed?"</li>
+            <li><strong>Option 2 (sketch):</strong> "Draw a quick sketch of your interpretation of one concept or artwork from today."</li>
+          </ul>
+          <p>Exit tickets do not need to be graded — use them to gauge emotional state and comprehension going into Day 3.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-hd"><div class="tip-ico a">&#9888;</div><div class="tip-title">Facilitator personal notes (from curriculum draft)</div><span class="tip-badge tb-a">For your awareness</span></div>
+        <div class="tip-body">
+          <p>The following concerns were flagged during curriculum development — worth keeping in mind:</p>
+          <ul>
+            <li>Art interpretation is inherently subjective — frame all interpretations as "possible readings," not definitive answers</li>
+            <li>Dimensions for <em>Nuclear II</em> (Moholy-Nagy) still need to be confirmed before class</li>
+            <li>Consider whether to add a 4th artwork — the current three are all abstract, which accurately reflects the era but may benefit from one more grounded example</li>
+            <li>More research on Moholy-Nagy's personal relationship to the bombings may strengthen the contextual discussion</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAC DAY 3 -->
+    <div class="fpanel" id="fp3">
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico g">&#9200;</div><div class="tip-title">Day 3 — Timing overview</div><span class="tip-badge tb-g">~4 hrs</span></div><div class="tip-body"><div class="timing-row"><div class="tr-t">9:00 am</div><div class="tr-a">Reading — <em>Command and Control</em> excerpt (Damascus incident)</div><div class="tr-d">45 min</div></div><div class="timing-row"><div class="tr-t">9:45 am</div><div class="tr-a">Film clip — facilitator-selected segment on deterrence</div><div class="tr-d">20 min</div></div><div class="timing-row"><div class="tr-t">10:05 am</div><div class="tr-a">MCQ discussion — ethics of deterrence</div><div class="tr-d">40 min</div></div><div class="timing-row"><div class="tr-t">10:45 am</div><div class="tr-a">Short essay (300 words) — graded</div><div class="tr-d">60 min</div></div></div></div>
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico a">&#9888;</div><div class="tip-title">Emotional safety note for Day 3</div><span class="tip-badge tb-a">Important</span></div><div class="tip-body"><p>Day 3 engages with moral philosophy under conditions of mass violence. Some students may find the ethical framing destabilizing — particularly those from communities historically affected by nuclear testing (Marshall Islands, Navajo Nation, downwinders in the American West).</p><p><strong>Before the discussion:</strong> "I want to acknowledge that for some communities, nuclear weapons are not an abstract policy question — they are lived experience. If anything today brings up something personal, you are welcome to step back or speak with me privately."</p></div></div>
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico b">&#128161;</div><div class="tip-title">Discussion tips — deterrence ethics</div></div><div class="tip-body"><p>The deterrence ethics question is intentionally open — there is no single correct answer. Resist the urge to resolve the tension. Your role is to keep the conversation evidence-based and ensure no position is mocked.</p><p><strong>If a student says "this is just how it is":</strong> "What would it take for that to change? Has it ever changed in history?"</p><p><strong>If a student expresses hopelessness:</strong> "Let's hold that feeling — we're going to look at Day 4 specifically for evidence that change is possible."</p></div></div>
+    </div>
+
+    <!-- FAC DAY 4 -->
+    <div class="fpanel" id="fp4">
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico g">&#9200;</div><div class="tip-title">Day 4 — Timing overview</div><span class="tip-badge tb-g">~4 hrs</span></div><div class="tip-body"><div class="timing-row"><div class="tr-t">9:00 am</div><div class="tr-a">TPNW reading + response</div><div class="tr-d">40 min</div></div><div class="timing-row"><div class="tr-t">9:40 am</div><div class="tr-a">Case studies — Freeze movement &amp; ICAN</div><div class="tr-d">30 min</div></div><div class="timing-row"><div class="tr-t">10:10 am</div><div class="tr-a">MCQ discussion — levers for change</div><div class="tr-d">40 min</div></div><div class="timing-row"><div class="tr-t">10:50 am</div><div class="tr-a">Action mapping — Day 5 brief outline</div><div class="tr-d">60 min</div></div></div></div>
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico b">&#128161;</div><div class="tip-title">Facilitation note — moving from problem to agency</div></div><div class="tip-body"><p>Day 4 is the emotional turning point of the course. After two days of heavy content, students need to feel that action is possible. Be intentional about your energy — if you seem tired or cynical, the room will reflect it.</p><p><strong>Opening reframe:</strong> "Yesterday we sat with a hard question. Today we look at what people have actually done — and what you might do."</p><p>The action mapping activity is the most important hands-on work of the week. Give students genuine time (45–60 min) to develop their outlines. Circulate and ask questions rather than giving answers.</p></div></div>
+    </div>
+
+    <!-- FAC DAY 5 -->
+    <div class="fpanel" id="fp5">
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico g">&#9200;</div><div class="tip-title">Day 5 — Timing overview</div><span class="tip-badge tb-g">~4 hrs</span></div><div class="tip-body"><div class="timing-row"><div class="tr-t">9:00 am</div><div class="tr-a">Brief finalization (individual writing time)</div><div class="tr-d">60 min</div></div><div class="timing-row"><div class="tr-t">10:00 am</div><div class="tr-a">Presentations (3 min each + 2 min Q&amp;A)</div><div class="tr-d">90 min</div></div><div class="timing-row"><div class="tr-t">11:30 am</div><div class="tr-a">Final MCQ poll + written reflection</div><div class="tr-d">20 min</div></div><div class="timing-row"><div class="tr-t">11:50 am</div><div class="tr-a">Closing remarks &amp; course wrap-up</div><div class="tr-d">15 min</div></div></div></div>
+      <div class="tip-card"><div class="tip-hd"><div class="tip-ico g">&#128100;</div><div class="tip-title">Closing script</div><span class="tip-badge tb-g">Read aloud</span></div><div class="tip-body"><div class="script"><div class="script-label">Closing script</div><p>"This week you engaged with one of the most complex problems in human history — not to paralyze you, but to give you the tools to act. You've done something most people never do: you sat with the discomfort long enough to understand it. That's where change begins. Whatever you do next — one conversation, one letter, one vote, one op-ed — it matters. Thank you for being here."</p></div></div></div>
+    </div>
+
+  </div>
+</div><!-- /fac view -->
+
+</div><!-- /shell -->
+
+<script>
+function switchView(v){
+  document.querySelectorAll('.view').forEach(function(el){el.classList.remove('active')});
+  document.getElementById('view-'+v).classList.add('active');
+  document.getElementById('tab-s').classList.toggle('on', v==='s');
+  document.getElementById('tab-f').classList.toggle('on', v==='f');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goDay(n){
+  document.querySelectorAll('#view-s .screen').forEach(function(el){el.classList.remove('active')});
+  document.getElementById('day'+n).classList.add('active');
+  document.querySelectorAll('.dnl').forEach(function(el,i){el.classList.toggle('on',i===n)});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goStep(prefix,n){
+  var panels=document.querySelectorAll('[id^="'+prefix+'-"]');
+  panels.forEach(function(el){el.classList.remove('active')});
+  var target=document.getElementById(prefix+'-'+n);
+  if(target)target.classList.add('active');
+  var steps=document.querySelectorAll('#day'+prefix.replace('d','')+' .step');
+  steps.forEach(function(el,i){el.classList.toggle('on',i===n)});
+}
+
+function mcqPick(el,wrapId){
+  var wrap=document.getElementById(wrapId);
+  if(wrap.dataset.voted)return;
+  wrap.querySelectorAll('.mcq-opt').forEach(function(o){o.classList.remove('sel')});
+  el.classList.add('sel');
+}
+
+function mcqReveal(wrapId,pcts,_){
+  var wrap=document.getElementById(wrapId);
+  if(wrap.dataset.voted)return;
+  wrap.dataset.voted='1';
+  var opts=wrap.querySelectorAll('.mcq-opt');
+  opts.forEach(function(o,i){
+    o.style.cursor='default';
+    o.querySelector('.opt-bar-wrap').style.display='block';
+    o.querySelector('.opt-pct').style.display='block';
+    o.querySelector('.opt-pct').textContent=pcts[i]+'%';
+    setTimeout(function(){o.querySelector('.opt-bar').style.width=pcts[i]+'%'},60);
+  });
+  var disc=wrap.nextElementSibling;
+  if(disc&&disc.classList.contains('mcq-discuss'))disc.style.display='block';
+}
+
+function revealArt(btn){
+  var ctx=btn.nextElementSibling;
+  if(ctx){ctx.style.display='block';btn.style.display='none';}
+}
+
+function fday(n){
+  document.querySelectorAll('.fpanel').forEach(function(el){el.classList.remove('active')});
+  document.getElementById('fp'+n).classList.add('active');
+  document.querySelectorAll('.fday').forEach(function(el,i){el.classList.toggle('on',i===n-1)});
+}
+</script>
+</body>
+</html>
